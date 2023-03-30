@@ -16,20 +16,88 @@ mars <- function(formula,data,control=mars.control()) {
   x_names <- colnames(x)
   control <- validate_mars.control(control)
   fwd <- fwd_stepwise(y,x,control)
-  bwd <- bwd_stepwise(fwd,control)
-  fit <- lm(y~.-1,data=data.frame(y=y,bwd$B)) # notice -1 added
-  out <- c(list(call=cc,formula=formula,y=y,B=bwd$B,Bfuncs=bwd$Bfuncs,
-                x_names=x_names),fit)
-  class(out) <- c("mars",class(fit))
-  out
+  fwd
+  # bwd <- bwd_stepwise(fwd,control)
+  # fit <- lm(y~.-1,data=data.frame(y=y,bwd$B)) # notice -1 added
+  # out <- c(list(call=cc,formula=formula,y=y,B=bwd$B,Bfuncs=bwd$Bfuncs,
+  #               x_names=x_names),fit)
+  # class(out) <- c("mars",class(fit))
+  # out
 }
 
 
 fwd_stepwise <- function(y,x,control=mars.control()){
+
+  Mmax = control$Mmax;
+
+  N <- length(y)
+  n <- ncol(x)
+  B <- init_B(N,Mmax)
+  Bfuncs = vector(mode = "list", length = Mmax + 1)
+  splits <- data.frame(m=rep(NA,Mmax),v=rep(NA,Mmax),t=rep(NA,Mmax))
+
+  #---------------------------------------------------
+
+  pairs = Mmax/2;
+
+  for(i in 1:pairs) {
+
+    M = 2*i-1;
+    lof_best <- Inf
+
+    for(m in 1:M) {
+
+      remaining_xvar = setdiff(1:n, Bfuncs[[m]][,2])
+
+      for(v in remaining_xvar){
+
+        tt <- split_points(x[,v],B[,m])
+
+        for(t in tt) {
+
+          Bnew <- data.frame(B[,(1:M)],
+                             # Add pairs of basis functions
+                             Btem1=B[,m]*h(x[,v],1,t),
+                             Btem2=B[,m]*h(x[,v],-1,t))
+          Bfuncs[[M+1]] = Bfuncs[[m]]
+          Bfuncs[[M+2]] = Bfuncs[[m]]
+          gdat <- data.frame(y=y,Bnew)
+          lof <- LOF(y~.,gdat)
+
+          if(lof < lof_best) {
+            lof_best <- lof
+            splits[M,] <- c(m,v,t)
+          }
+
+        } #End loop over splits (t)
+
+      } #End loop over variables (v)
+
+    } #End loop over basis functions to split (m)
+
+    #Save optimal (m, v, t) and update basis functions
+    mstar <- splits[M,1]; vstar <- splits[M,2]; tstar <- splits[M,3]
+    cat("[Info] best (m,v,t,lof): (",mstar,vstar,tstar,lof_best,")\n")
+
+    B[,M+1] <- B[,mstar]*h(x[,vstar],-1,tstar) #Add left child
+    B[,M+2] <- B[,mstar]*h(x[,vstar],1,tstar) #Add right child
+
+    #Add pairs of basis functions
+    Bfuncs[[M+1]] = rbind(Bfuncs[[mstar]], c(s=-1, v=vstar, t=tstar))
+    Bfuncs[[M+2]] = rbind(Bfuncs[[mstar]], c(s=1, v=vstar, t=tstar))
+
+  } # end loop over M
+
+  colnames(B) = paste0("B",(0:(ncol(B)-1)))
+  return(list(y=y,B=B,Bfuncs=Bfuncs))
+
 }
 
 init_B <- function(N,Mmax) {
-
+  B <- data.frame(matrix(NA,nrow=N,ncol=(Mmax+1)))
+  B[,1] <- 1
+  names(B) <- c("B0",paste0("B",1:Mmax))
+  return(B)
 }
 
 bwd_stepwise <- function(fwd,control) {
@@ -37,16 +105,19 @@ bwd_stepwise <- function(fwd,control) {
 
 LOF <- function(form,data,control) {
   # update this LOF to GCV
+  ff <- lm(form,data)
+  return(sum(residuals(ff)^2))
 }
 
 h <- function(x,s,t) {
-  ...?pmax()
   # if x>t, s=+1, this return max(0,x-t)
   # if x<t, s=-1, this return max(0,t-x)
+  return(pmax(0,s*(x-t)))
 }
 
 split_points <- function(xv,Bm) {
-  #...
+  out <- sort(unique(xv[Bm>0]))
+  return(out[-length(out)])
 }
 
 #------------------------------------------------------------------------
@@ -54,10 +125,22 @@ split_points <- function(xv,Bm) {
 #------------------------------------------------------------------------
 #
 new_mars.control <- function(control) {
+  structure(control,class="mars.control")
 }
 
 validate_mars.control <- function(control) {
-
+  stopifnot(is.integer(control$Mmax),
+            is.numeric(control$d),
+            is.logical(control$trace))
+  if(control$Mmax < 2) {
+    warning("Mmax must be >= 2; Reset it to 2")
+    control$Mmax <- 2
+  }
+  if(control$Mmax %% 2 > 0) {
+    control$Mmax <- as.integer(2*ceiling(control$Mmax/2))
+    warning("Mmax should be an even integer. Reset it to ",control$Mmax)
+  }
+  control
 }
 
 
@@ -76,3 +159,8 @@ mars.control <- function(Mmax=2,d=3,trace=FALSE) {
   control <- validate_mars.control(control)
   new_mars.control(control)
 }
+#
+#
+# set.seed(123); n <- 10
+# data <- data.frame(x1=rnorm(n),x2=rnorm(n), y=rnorm(n))
+# formula <- formula(y ~.)
