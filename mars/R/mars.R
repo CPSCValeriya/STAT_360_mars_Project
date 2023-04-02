@@ -16,13 +16,12 @@ mars <- function(formula,data,control=mars.control()) {
   x_names <- colnames(x)
   control <- validate_mars.control(control)
   fwd <- fwd_stepwise(y,x,control)
-  fwd
-  # bwd <- bwd_stepwise(fwd,control)
-  # fit <- lm(y~.-1,data=data.frame(y=y,bwd$B)) # notice -1 added
-  # out <- c(list(call=cc,formula=formula,y=y,B=bwd$B,Bfuncs=bwd$Bfuncs,
-  #               x_names=x_names),fit)
-  # class(out) <- c("mars",class(fit))
-  # out
+  bwd <- bwd_stepwise(fwd,control)
+  fit <- lm(y~.-1,data=data.frame(y=y,bwd$B)) # notice -1 added
+  out <- c(list(call=cc,formula=formula,y=y,B=bwd$B,Bfuncs=bwd$Bfuncs,
+                x_names=x_names),fit)
+  class(out) <- c("mars",class(fit))
+  out
 }
 
 
@@ -126,30 +125,25 @@ bwd_stepwise <- function(fwd,control) {
       K = setdiff(L,m) # Removing mth basis function
 
       data_sub = data.frame(y=fwd$y, fwd$B[,K])
-      lof = LOF(y~.-1, data_sub, control) # Re-calculate LOF for new model
+      lof = LOF(y~., data_sub, control) # Re-calculate LOF for new model
 
       # Update kstar with best LOF in this iteration
       if(lof < b){
         b = lof
         kstar = K
-        cat("update kstar:",kstar,"\n");
       }
 
       # Update jstar with best LOF of all iterations
       if(lof < lofstar){
         lofstar = lof
         jstar = K
-        cat("update jstar:",jstar,"\n");
       }
 
     }
 
   }
-  cat("B all:\n")
-  print(fwd$B)
-  cat("jstar1: ", jstar, "\n")
+
   jstar = c(1, jstar)
-  cat("jstar2: ", jstar, "\n")
   #best model with indices of best model
   return(list(y=fwd$y, B=fwd$B[,jstar],Bfuncs=fwd$Bfuncs[jstar]))
 
