@@ -62,7 +62,7 @@ fwd_stepwise <- function(y,x,control=mars.control()){
           Bfuncs[[M+1]] = Bfuncs[[m]]
           Bfuncs[[M+2]] = Bfuncs[[m]]
           gdat <- data.frame(y=y,Bnew)
-          lof <- LOF(y~.,gdat)
+          lof <- LOF(y~.,gdat,control)
 
           if(lof < lof_best) {
             lof_best <- lof
@@ -101,12 +101,72 @@ init_B <- function(N,Mmax) {
 }
 
 bwd_stepwise <- function(fwd,control) {
+
+  #Guidance from lecture material
+
+  Mmax = ncol(fwd$B)-1
+  jstar = 2:(Mmax+1)
+  kstar = jstar
+  data = data.frame(y=fwd$y, fwd$B)
+  lofstar = LOF(y~.-1, data, control)
+
+  # Loop over M (outer loop)
+  for(M in (Mmax+1):2){
+
+    b = Inf # Best LOF
+    L = kstar # Temp copy of kstar
+
+    if(control$trace){
+     cat("L:", L, "\n")
+    }
+
+    # Inner loop over model terms
+    for(m in L){
+
+      K = setdiff(L,m) # Removing mth basis function
+
+      data_sub = data.frame(y=fwd$y, fwd$B[,K])
+      lof = LOF(y~.-1, data_sub, control) # Re-calculate LOF for new model
+
+      # Update kstar with best LOF in this iteration
+      if(lof < b){
+        b = lof
+        kstar = K
+        cat("update kstar:",kstar,"\n");
+      }
+
+      # Update jstar with best LOF of all iterations
+      if(lof < lofstar){
+        lofstar = lof
+        jstar = K
+        cat("update jstar:",jstar,"\n");
+      }
+
+    }
+
+  }
+  cat("B all:\n")
+  print(fwd$B)
+  cat("jstar1: ", jstar, "\n")
+  jstar = c(1, jstar)
+  cat("jstar2: ", jstar, "\n")
+  #best model with indices of best model
+  return(list(y=fwd$y, B=fwd$B[,jstar],Bfuncs=fwd$Bfuncs[jstar]))
+
 }
 
 LOF <- function(form,data,control) {
-  # update this LOF to GCV
-  ff <- lm(form,data)
-  return(sum(residuals(ff)^2))
+
+  #Guidance from lecture material
+
+  model <- lm(form,data)
+  rss = (sum(residuals(model)^2))
+  nrows = nrow(data)
+  ncols = length(model$coefficients)-1
+  c_tilde = sum(diag(hatvalues(model))) + control$d*ncols
+  lof = rss * (nrows/(nrows - c_tilde)^2)
+  return(lof)
+
 }
 
 h <- function(x,s,t) {
@@ -159,8 +219,12 @@ mars.control <- function(Mmax=2,d=3,trace=FALSE) {
   control <- validate_mars.control(control)
   new_mars.control(control)
 }
-#
-#
+
 # set.seed(123); n <- 10
 # data <- data.frame(x1=rnorm(n),x2=rnorm(n), y=rnorm(n))
+# y=rnorm(n)
 # formula <- formula(y ~.)
+# mc=mars.control()
+# LOF(formula,data,mc)
+#
+
