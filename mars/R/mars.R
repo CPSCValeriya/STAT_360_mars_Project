@@ -24,57 +24,6 @@ mars <- function(formula,data,control=mars.control()) {
   out
 }
 
-#Predict method for mars objects
-predict.mars <- function(object,newdata) {
-
-  if(missing(newdata) || is.null(newdata)) {
-
-    B <- as.matrix(object$B)
-
-  }else{
-
-    tt <- terms(object$formula,data=newdata)
-    tt <- delete.response(tt)
-    mf <- model.frame(tt,newdata)
-    mt <- attr(mf, "terms")
-    X <- model.matrix(mt, mf)[,-1]
-    B <- make_B(X, object$Bfuncs)
-
-  }
-
-  beta <- object$coefficients
-  drop(B %*% beta) # Performs scalar product
-
-}
-
-#Create set of basis functions using the Bfuncs list
-#Returns the corresponding matrix of basis functions
-make_B <- function(model, Bfuncs){
-
-  num_Bfuncs = length(Bfuncs)
-  B <- data.frame(matrix(1,nrow=nrow(model),ncol=num_Bfuncs))
-
-  for(i in 2:num_Bfuncs){
-
-    num_products = nrow(data.frame(Bfuncs[i]))
-
-    for(j in 1:num_products){
-
-      #Retrieve hinge function information from corresponding Bfuncs
-      curr_hinge = Bfuncs[[i]][j,]
-      v = curr_hinge[["v"]]
-      s = curr_hinge[["s"]]
-      t = curr_hinge[["t"]]
-      B[,i] = B[,i] * h(model[,v],s,t)
-
-    }
-
-  }
-
-  invisible(as.matrix(B))
-
-}
-
 fwd_stepwise <- function(y,x,control=mars.control()){
 
   Mmax = control$Mmax;
@@ -140,13 +89,6 @@ fwd_stepwise <- function(y,x,control=mars.control()){
   colnames(B) = paste0("B",(0:(ncol(B)-1)))
   return(list(y=y,B=B,Bfuncs=Bfuncs))
 
-}
-
-init_B <- function(N,Mmax) {
-  B <- data.frame(matrix(NA,nrow=N,ncol=(Mmax+1)))
-  B[,1] <- 1
-  names(B) <- c("B0",paste0("B",1:Mmax))
-  return(B)
 }
 
 bwd_stepwise <- function(fwd,control) {
@@ -223,6 +165,14 @@ split_points <- function(xv,Bm) {
   out <- sort(unique(xv[Bm>0]))
   return(out[-length(out)])
 }
+
+init_B <- function(N,Mmax) {
+  B <- data.frame(matrix(NA,nrow=N,ncol=(Mmax+1)))
+  B[,1] <- 1
+  names(B) <- c("B0",paste0("B",1:Mmax))
+  return(B)
+}
+
 
 #------------------------------------------------------------------------
 # constructor, validator and helper for class mars.control
