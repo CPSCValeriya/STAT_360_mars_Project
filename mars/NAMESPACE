@@ -3,3 +3,4 @@ importFrom("graphics", "curve", "par")
 importFrom("stats", "anova", "delete.response", "ecdf", "hatvalues",
                "lm", "model.frame", "model.matrix", "model.response",
                "residuals", "terms")
+import(crayon)
