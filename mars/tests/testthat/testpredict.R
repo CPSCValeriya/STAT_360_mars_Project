@@ -1,5 +1,5 @@
-load("C:/Users/Valerie/Downloads/STAT 360/mars_project/STAT_360_mars_Project/mars/tests/testthat/testpredict.RData")
-load("C:/Users/Valerie/Downloads/STAT 360/mars_project/STAT_360_mars_Project/mars/tests/testthat/testmars.RData")
+load("testpredict.RData")
+load("testmars.RData")
 
 test_that("predict.mars() returns the correct predictions on the same data used to fit the model", {expect_equal(predict.mars(testmars), testpredict)})
 
