@@ -1,4 +1,13 @@
 #Predict method for mars objects
+#' Title
+#'
+#' @param object
+#' @param newdata
+#'
+#' @return
+#' @export
+#'
+#' @examples
 predict.mars <- function(object,newdata) {
 
   cat(cyan$bold("Printing mars object prediction...\n\n"));
