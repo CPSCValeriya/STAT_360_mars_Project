@@ -1,3 +1,11 @@
+#' Print values for a mars Object
+#'
+#' @param mars a mars object, usually created by mars
+#'
+#' @return
+#' @export
+#'
+#' @examples
 print.mars <- function(mars){
 
   class(mars) = class(mars)[2]; #get lm class

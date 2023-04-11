@@ -1,3 +1,24 @@
+#'
+#' @title Plot Diagnostics for a mars Object
+#'
+#' @description Four plots (selected by which) are available: a cdf plot of |residuals|, a fitted vs residual plot,
+#' a q-q plot and a scale-location plot
+#'
+#' @param mars a mars object, typically the result of [mars()]
+#' @param which a subset of the numbers 1:4 specifying which plots to create, by default 1:4
+#'  \describe{
+#'   \item{1}{"CDF" plot of absolute value of residuals}
+#'   \item{2}{"Residual vs Fitted" plot}
+#'   \item{3}{"Normal Q-Q" plot}
+#'   \item{4}{"Scale-Location" plot}
+#'   }
+#' @param col color for: the line in the cdf plot or the points n the remaining points
+#' @param numpoints how many of the largest absolute value points to plot
+#' @param ... Extra parameters to pass to plotting functions
+#'
+#' @export
+
+
 plot.mars<-function(mars,which=c(1,2,3,4),col="purple",numpoints=3,...){
   par(ask=T)
   class(mars) = class(mars)[2]; #get lm class

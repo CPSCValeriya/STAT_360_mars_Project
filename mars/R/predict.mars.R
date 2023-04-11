@@ -1,4 +1,13 @@
 #Predict method for mars objects
+#' Model Predictions for MARS Objects
+#'
+#' @param object a mars object to use for prediction, usually created by mars()
+#' @param newdata optional data to use for prediction
+#'
+#' @return
+#' @export
+#'
+#' @examples
 predict.mars <- function(object,newdata) {
 
   cat(cyan$bold("Printing mars object prediction...\n\n"));
