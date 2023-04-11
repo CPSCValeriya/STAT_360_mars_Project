@@ -26,23 +26,23 @@ plot.mars<-function(mars,which=c(1,2,3,4),col="purple",numpoints=3,...){
   if (1 %in% which){
     # CDF Plot
     cdf=ecdf(x=abs(mars$residuals))
-    plot(cdf,do.points=F,xlab="abs(Residuals)",ylab = "Proportion",main="Cumulative Distribution")
+    plot(cdf,do.points=F,xlab="abs(Residuals)",ylab = "Proportion",main="Cumulative Distribution", pch=16)
     curve(cdf,from=0,to=max(abs(mars$residuals)),add=T,col=col)
   }
 
   if (2 %in% which){
     # Residual vs Fitted Plot
-    plot(mars,which=1,col=col,id.n=numpoints)
+    plot(mars,which=1,col=col,id.n=numpoints,pch=16)
   }
 
   if (3 %in% which){
     # Q-Q Plot
-    plot(mars,which=2,col=col,id.n=numpoints)
+    plot(mars,which=2,col=col,id.n=numpoints,pch=16)
   }
 
   if (4 %in% which){
     # Scale - Location Plot
-    plot(mars,which=3,col=col,id.n=numpoints)
+    plot(mars,which=3,col=col,id.n=numpoints,pch=16)
   }
 
   class(mars) = c("mars",class(mars))
