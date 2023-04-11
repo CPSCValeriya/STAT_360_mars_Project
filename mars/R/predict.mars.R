@@ -1,8 +1,7 @@
 #Predict method for mars objects
-#' Title
 #'
-#' @param object
-#' @param newdata
+#' @param object a mars object to use for prediction, usually created by mars()
+#' @param newdata optional data to use for prediction
 #'
 #' @return
 #' @export

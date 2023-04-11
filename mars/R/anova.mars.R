@@ -1,3 +1,11 @@
+#' ANOVA for MARS Model Fits
+#'
+#' @param mars a mars object
+#'
+#' @return
+#' @export
+#'
+#' @examples
 anova.mars <- function(mars){
 
   class(mars) = class(mars)[2]; #get lm class
