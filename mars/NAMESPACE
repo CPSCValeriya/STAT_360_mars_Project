@@ -4,3 +4,8 @@ importFrom("stats", "anova", "delete.response", "ecdf", "hatvalues",
                "lm", "model.frame", "model.matrix", "model.response",
                "residuals", "terms")
 import(crayon)
+S3method(anova,mars)
+S3method(plot,mars)
+S3method(predict,mars)
+S3method(print,mars)
+S3method(summary,mars)
