@@ -1,11 +1,13 @@
 Package: mars
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Multivariate Adaptive Regression Splines
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Valeriya (Valerie) Kistrina, Christine Chuong, Zenith (Robert) Tandava Yurkovich 
+Maintainer: Valeriya (Valerie) Kistrina <vkistrin@sfu.ca>, Christine Chuong <cchuong@sfu.ca>, Zenith (Robert) Tandava Yurkovich <zyurkovi@sfu.ca> 
+Description: Multivariate Adaptive Regression Splines ()
+    is used to apply a regression model to a given set of data. 
+    In doing so, the function analyzes the dataset and creates 
+    numerous break points at which the fitted model will change.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
