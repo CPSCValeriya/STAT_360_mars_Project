@@ -27,3 +27,13 @@
 Four plots (selected by which) are available: a cdf plot of |residuals|, a fitted vs residual plot,
 a q-q plot and a scale-location plot
 }
+\examples{
+## Analysis of the car data found in mtcars
+## Printing the cdf, fitted vs residual and q-q plot
+## with 4 label points and green points
+m<-mars(form=mpg~.,data=mtcars,control=mars.control())
+plot(m,which=c(1,2,3),col="green",numpoints=4)
+}
+\references{
+https://CRAN.R-project.org/package=earth
+}
