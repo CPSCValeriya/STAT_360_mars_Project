@@ -3,9 +3,29 @@
 #' Fit Friedman's Multivariate Adaptive Regression Splines (MARS) model.
 #'
 #' @param formula an R formula
-#' @param data a data frame containing the data
-# ....
-# .....
+#' @param data a data frame containing the a response variable and predictors
+#' @param control a mars.control object created using mars.control()
+#'
+#' @return An S3 model of class "mars"
+#'
+#' @references
+#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
+#'  1–67. https://doi.org/10.1214/aos/1176347963
+#'
+#'@seealso
+#'\describe{
+#'\item{anova.mars}{}
+#'\item{plot.mars}{}
+#'\item{predict.mars}{}
+#'\item{print.mars}{}
+#'\item{summary.mars}{}
+#'}
+#'
+#'@examples
+#'## Analyzing Boston value data found in the Boston dataset
+#'
+#'mars.mod <- mars(medv~zn+crim+rm,data=Boston,control=mars.control())
+#'print(mars.mod)
 
 mars <- function(formula,data,control=mars.control()) {
   cc <- match.call() # save the call

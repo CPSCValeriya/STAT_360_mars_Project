@@ -1,4 +1,4 @@
-#Predict method for mars objects
+#' Predict method for mars objects
 #'
 #' @param object a mars object to use for prediction, usually created by mars()
 #' @param newdata optional data to use for prediction
