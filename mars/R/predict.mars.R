@@ -4,14 +4,14 @@
 #' @param newdata optional data to use for prediction
 #'
 #' @return a vector of prediction values
-#' @export
-#'
 #' @family methods
+#' @export
 #' @import crayon
+#'
 #' @examples
-#' mars.mod <-mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
-#' predict(mars.mod)
-
+#' ## Predict values for iris data
+#' m <-mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
+#' predict(m)
 predict.mars <- function(object,newdata) {
 
   cat(cyan$bold("Printing mars object prediction...\n\n"));
@@ -47,7 +47,6 @@ predict.mars <- function(object,newdata) {
 #' @return The corresponding matrix of basis functions
 #' @export
 #'
-#' @examples
 make_B <- function(model, Bfuncs){
 
   num_Bfuncs = length(Bfuncs)

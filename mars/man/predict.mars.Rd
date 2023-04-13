@@ -9,7 +9,7 @@
 \arguments{
 \item{object}{a mars object to use for prediction, usually created by mars()}
 
-\item{newdata}{optional data to use for prediction}
+\item{newdata}{ptional data to use for prediction}
 }
 \value{
 a vector of prediction values
@@ -18,8 +18,9 @@ a vector of prediction values
 Predict method for mars objects
 }
 \examples{
-mars.mod <-mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
-predict(mars.mod)
+## Predict values for iris data
+m <-mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
+predict(m)
 }
 \seealso{
 Other methods: 
