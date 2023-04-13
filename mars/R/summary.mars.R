@@ -10,9 +10,8 @@
 #' @examples
 summary.mars <- function(mars){
 
-  class(mars) = class(mars)[2]; #get lm class
   print_basis(mars)
-  print(summary(mars))
-  class(mars) = c("mars",class(mars)) #reset classes
+  cat(red$bold("\nPrinting mars object summary...\n"));
+  summary.lm(mars)
 
 }

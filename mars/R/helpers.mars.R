@@ -49,13 +49,17 @@ print_product = function(mars){
     num_products = nrow(data.frame(mars$Bfuncs[i]))
 
     coeff = mars$coefficients[i];
-    if(coeff > 0){
-      coeff = paste0("+",sprintf("%.2f",coeff),sep="");
-    }else{
-      coeff = sprintf("%.2f",coeff);
+
+    if(!is.na(coeff)){
+      if(coeff > 0){
+        coeff = paste0("+",sprintf("%.2f",coeff),sep="");
+      }else{
+        coeff = sprintf("%.2f",coeff);
+      }
+
+      formula = paste0(formula, coeff, " * ", sep="");
     }
 
-    formula = paste0(formula, coeff, " * ", sep="");
     for(j in 1:num_products){
 
       #Retrieve hinge function information from corresponding Bfuncs
