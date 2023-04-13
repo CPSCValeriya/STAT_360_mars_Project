@@ -7,17 +7,27 @@
 #' @param mars a mars object, typically the result of [mars()]
 #' @param which a subset of the numbers 1:4 specifying which plots to create, by default 1:4
 #'  \describe{
-#'   \item{1}{"CDF" plot of absolute value of residuals}
-#'   \item{2}{"Residual vs Fitted" plot}
-#'   \item{3}{"Normal Q-Q" plot}
-#'   \item{4}{"Scale-Location" plot}
+#'   \item{1. "CDF" plot of absolute value of residuals}{}
+#'   \item{2. "Residual vs Fitted" plot}{}
+#'   \item{3. "Normal Q-Q" plot}{}
+#'   \item{4. "Scale-Location" plot}{}
 #'   }
 #' @param col color for: the line in the cdf plot or the points n the remaining points
 #' @param numpoints how many of the largest absolute value points to plot
 #' @param ... Extra parameters to pass to plotting functions
 #'
 #' @export
-
+#'
+#' @references
+#' https://CRAN.R-project.org/package=earth
+#'
+#' @examples
+#' ## Analysis of the car data found in mtcars
+#' ## Printing the cdf, fitted vs residual and q-q plot
+#' ## with 4 label points and green points
+#'
+#' m<-mars(form=mpg~.,data=mtcars,control=mars.control())
+#' plot(m,which=c(1,2,3),col="green",numpoints=4)
 
 plot.mars<-function(mars,which=c(1,2,3,4),col="purple",numpoints=3,...){
   par(ask=T)

@@ -3,9 +3,29 @@
 #' Fit Friedman's Multivariate Adaptive Regression Splines (MARS) model.
 #'
 #' @param formula an R formula
-#' @param data a data frame containing the data
-# ....
-# .....
+#' @param data a data frame containing the a response variable and predictors
+#' @param control a mars.control object created using mars.control()
+#'
+#' @return An S3 model of class "mars"
+#'
+#' @references
+#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
+#'  1–67. https://doi.org/10.1214/aos/1176347963
+#'
+#'@seealso
+#'\describe{
+#'\item{anova.mars}{}
+#'\item{plot.mars}{}
+#'\item{predict.mars}{}
+#'\item{print.mars}{}
+#'\item{summary.mars}{}
+#'}
+#'
+#'@examples
+#'## Analyzing flower value data found in the iris dataset
+#'
+#'mars.mod <- mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
+#'print(mars.mod)
 
 mars <- function(formula,data,control=mars.control()) {
   cc <- match.call() # save the call
@@ -24,6 +44,25 @@ mars <- function(formula,data,control=mars.control()) {
   out
 }
 
+#' Forward Stepwise
+#'
+#' Implementing algorithm 2 from the page 17 of the Friedman Paper
+#' @param y vector of response values
+#' @param x dataset of predictor variables
+#' @param control mars.control object created by mars.control
+#'
+#' @return A list with elements
+#' \describe{
+#' \item{y The same vector of response values given as input}{}
+#' \item{B }{}
+#' \item{Bfuncs }{}
+#' }
+#' @export
+#'
+#' @references
+#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
+#'  1–67. https://doi.org/10.1214/aos/1176347963
+#'
 fwd_stepwise <- function(y,x,control=mars.control()){
 
   Mmax = control$Mmax;
@@ -91,6 +130,25 @@ fwd_stepwise <- function(y,x,control=mars.control()){
 
 }
 
+#' Backwards Stepwise
+#'
+#' Implementation of algorithm 3 from page 17 of the Friedman paper
+#'
+#' @param fwd output created by running fwd_stepwise
+#' @param control mars.control object, created with mars.control
+#'
+#' @return A list with elements
+#' \describe{
+#' \item{y The same vector of response values given as input}{}
+#' \item{B }{}
+#' \item{Bfuncs }{}
+#' }
+#'
+#' @export
+#'
+#' @references
+#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
+#'  1–67. https://doi.org/10.1214/aos/1176347963
 bwd_stepwise <- function(fwd,control) {
 
   #Guidance from lecture material
@@ -141,6 +199,21 @@ bwd_stepwise <- function(fwd,control) {
 
 }
 
+#' Lack Of Fit
+#'
+#' Use GCV to calculate the the lack of fit of a model, following equation 30
+#' on page 20 of the Friedman paper
+#'
+#' @param form formula to fit a linear model
+#' @param data dataset to fit a model to
+#' @param control a mars.control object created by mars.control
+#'
+#' @return lof, the lack of fit value for the linear model fit with the given data and formula
+#' @export
+#' @references
+#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
+#'  1–67. https://doi.org/10.1214/aos/1176347963
+
 LOF <- function(form,data,control) {
 
   #Guidance from lecture material
@@ -155,17 +228,53 @@ LOF <- function(form,data,control) {
 
 }
 
+#' Step Function
+#'
+#' Implementation of the step function defined on page 11 of the Friedman paper
+#' @param x the data value being compared to the split point
+#' @param s the side of the split point
+#' @param t the split point
+#'
+#' @return if s=+1, this returns max(0,x-t); if s=-1, this return max(0,t-x)
+#' @export
+#' @references
+#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
+#'  1–67. https://doi.org/10.1214/aos/1176347963
+
 h <- function(x,s,t) {
   # if x>t, s=+1, this return max(0,x-t)
   # if x<t, s=-1, this return max(0,t-x)
   return(pmax(0,s*(x-t)))
 }
 
+#' Split Points
+#'
+#' Find possible split points and sort them, removing the largest value
+#'
+#' @param xv Possible split points
+#' @param Bm A basis function
+#'
+#' @return a sorted list of unique split points where the basis function is positive,
+#' with the largest point removed
+#' @export
+#'
 split_points <- function(xv,Bm) {
   out <- sort(unique(xv[Bm>0]))
   return(out[-length(out)])
 }
 
+#' Initialize B
+#'
+#' Initialize a matrix for all the basis functions
+#'
+#' @param N the number of points in each basis function
+#' @param Mmax the maxium number of basis functions
+#'
+#' @return a data frame with an intercept column filled with ones and a column filled with
+#' NA for each basis function.
+#'
+#' @export
+#'
 init_B <- function(N,Mmax) {
   B <- data.frame(matrix(NA,nrow=N,ncol=(Mmax+1)))
   B[,1] <- 1
@@ -178,10 +287,28 @@ init_B <- function(N,Mmax) {
 # constructor, validator and helper for class mars.control
 #------------------------------------------------------------------------
 #
+
+#' mars.control helper function
+#'
+#' Helper function to create a new mars.control object
+#'
+#' @param control a control object
+#'
+#' @return a mars.control object
+#' @export
+#'
 new_mars.control <- function(control) {
   structure(control,class="mars.control")
 }
 
+#' Validator for `mars.control` objects
+#'
+#' Check that a mars.control object has valid parameters
+#' @param control a mars.control object
+#'
+#' @return a mars.control object
+#' @export
+#'
 validate_mars.control <- function(control) {
   stopifnot(is.integer(control$Mmax),
             is.numeric(control$d),
@@ -204,8 +331,9 @@ validate_mars.control <- function(control) {
 #' parameters used in the model fitting procedure.
 #'
 #' @param Mmax Maximum number of basis functions. Should be an even integer. Default value is 2.
-# .....
-# ...
+#' @param d A smoothing parameter
+#' @param trace logical, if TRUE traceback??????
+#' @export
 
 mars.control <- function(Mmax=2,d=3,trace=FALSE) {
   Mmax <- as.integer(Mmax)

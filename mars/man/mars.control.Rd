@@ -8,6 +8,10 @@ mars.control(Mmax = 2, d = 3, trace = FALSE)
 }
 \arguments{
 \item{Mmax}{Maximum number of basis functions. Should be an even integer. Default value is 2.}
+
+\item{d}{A smoothing parameter}
+
+\item{trace}{logical, if TRUE traceback??????}
 }
 \description{
 This function constructs a `mars.control` object that specifies
