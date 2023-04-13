@@ -16,3 +16,11 @@ using the components (list elements) "call" and "terms" from its argument
 \description{
 Title summary.mars
 }
+\seealso{
+Other methods: 
+\code{\link{anova.mars}()},
+\code{\link{plot.mars}()},
+\code{\link{predict.mars}()},
+\code{\link{print.mars}()}
+}
+\concept{methods}

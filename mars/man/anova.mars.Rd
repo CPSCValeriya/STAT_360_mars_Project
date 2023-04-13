@@ -12,3 +12,17 @@
 \description{
 ANOVA for MARS Model Fits
 }
+\examples{
+
+## Analysing Ozone data
+m <-mars(Ozone~Wind+Temp+Month,data=airquality,control=mars.control())
+anova(m)
+}
+\seealso{
+Other methods: 
+\code{\link{plot.mars}()},
+\code{\link{predict.mars}()},
+\code{\link{print.mars}()},
+\code{\link{summary.mars}()}
+}
+\concept{methods}

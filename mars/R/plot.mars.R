@@ -28,6 +28,11 @@
 #'
 #' m<-mars(form=mpg~.,data=mtcars,control=mars.control())
 #' plot(m,which=c(1,2,3),col="green",numpoints=4)
+#'
+#' @importFrom graphics curve par
+#' @importFrom stats anova delete.response ecdf hatvalues lm model.frame model.matrix model.response
+#' residuals terms
+#' @family methods
 
 plot.mars<-function(mars,which=c(1,2,3,4),col="purple",numpoints=3,...){
   par(ask=T)

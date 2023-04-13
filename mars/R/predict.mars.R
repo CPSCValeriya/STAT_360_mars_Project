@@ -7,6 +7,8 @@
 #' @export
 #'
 #' @examples
+#' @family methods
+#' @import crayon
 predict.mars <- function(object,newdata) {
 
   cat(cyan$bold("Printing mars object prediction...\n\n"));

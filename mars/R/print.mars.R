@@ -2,8 +2,8 @@
 #'
 #' @param mars a mars object, usually created by mars
 #'
-#' @return
 #' @export
+#' @family methods
 #'
 #' @examples
 print.mars <- function(mars){

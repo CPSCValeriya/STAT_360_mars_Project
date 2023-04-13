@@ -12,3 +12,11 @@
 \description{
 Print values for a mars Object
 }
+\seealso{
+Other methods: 
+\code{\link{anova.mars}()},
+\code{\link{plot.mars}()},
+\code{\link{predict.mars}()},
+\code{\link{summary.mars}()}
+}
+\concept{methods}

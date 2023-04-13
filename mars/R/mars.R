@@ -12,7 +12,7 @@
 #' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
 #'  1–67. https://doi.org/10.1214/aos/1176347963
 #'
-#'@seealso
+#' @seealso
 #'\describe{
 #'\item{anova.mars}{}
 #'\item{plot.mars}{}
@@ -21,7 +21,8 @@
 #'\item{summary.mars}{}
 #'}
 #'
-#'@examples
+#' @export
+#' @examples
 #'## Analyzing flower value data found in the iris dataset
 #'
 #'mars.mod <- mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())

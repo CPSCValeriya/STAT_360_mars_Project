@@ -2,10 +2,14 @@
 #'
 #' @param mars a mars object
 #'
-#' @return
 #' @export
+#' @family methods
 #'
 #' @examples
+#'
+#' ## Analysing Ozone data
+#' m <-mars(Ozone~Wind+Temp+Month,data=airquality,control=mars.control())
+#' anova(m)
 anova.mars <- function(mars){
 
   class(mars) = class(mars)[2]; #get lm class

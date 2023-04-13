@@ -14,3 +14,11 @@
 \description{
 Predict method for mars objects
 }
+\seealso{
+Other methods: 
+\code{\link{anova.mars}()},
+\code{\link{plot.mars}()},
+\code{\link{print.mars}()},
+\code{\link{summary.mars}()}
+}
+\concept{methods}

@@ -34,7 +34,16 @@ a q-q plot and a scale-location plot
 
 m<-mars(form=mpg~.,data=mtcars,control=mars.control())
 plot(m,which=c(1,2,3),col="green",numpoints=4)
+
 }
 \references{
 https://CRAN.R-project.org/package=earth
 }
+\seealso{
+Other methods: 
+\code{\link{anova.mars}()},
+\code{\link{predict.mars}()},
+\code{\link{print.mars}()},
+\code{\link{summary.mars}()}
+}
+\concept{methods}
