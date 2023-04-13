@@ -343,11 +343,5 @@ mars.control <- function(Mmax=2,d=3,trace=FALSE) {
   new_mars.control(control)
 }
 
-# set.seed(123); n <- 10
-# data <- data.frame(x1=rnorm(n),x2=rnorm(n), y=rnorm(n))
-# y=rnorm(n)
-# formula <- formula(y ~.)
-# mc=mars.control()
-# LOF(formula,data,mc)
-#
+
 
