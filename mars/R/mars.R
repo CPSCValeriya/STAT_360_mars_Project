@@ -22,9 +22,9 @@
 #'}
 #'
 #'@examples
-#'## Analyzing Boston value data found in the Boston dataset
+#'## Analyzing flower value data found in the iris dataset
 #'
-#'mars.mod <- mars(medv~zn+crim+rm,data=Boston,control=mars.control())
+#'mars.mod <- mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
 #'print(mars.mod)
 
 mars <- function(formula,data,control=mars.control()) {

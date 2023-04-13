@@ -1,4 +1,10 @@
 library(crayon)
+#' Print Basis Functions
+#'
+#' @param mars a mars object, created using mars
+#'
+#' @export
+#'
 print_basis = function(mars){
 
   num_Bfuncs = length(mars$Bfuncs)
@@ -36,6 +42,12 @@ print_basis = function(mars){
 
 }
 
+#' Print Product
+#'
+#' @param mars a mars object, created using mars
+#'
+#' @export
+#'
 print_product = function(mars){
 
 

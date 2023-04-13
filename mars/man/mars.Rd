@@ -20,9 +20,9 @@ An S3 model of class "mars"
 Fit Friedman's Multivariate Adaptive Regression Splines (MARS) model.
 }
 \examples{
-## Analyzing Boston value data found in the Boston dataset
+## Analyzing flower value data found in the iris dataset
 
-mars.mod <- mars(medv~zn+crim+rm,data=Boston,control=mars.control())
+mars.mod <- mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
 print(mars.mod)
 }
 \references{

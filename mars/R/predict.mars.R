@@ -32,8 +32,17 @@ predict.mars <- function(object,newdata) {
 }
 
 
-#Create set of basis functions using the Bfuncs list
-#Returns the corresponding matrix of basis functions
+#' Make B matrix
+#'
+#' Create set of basis functions using the Bfuncs list
+#'
+#' @param model a model to create basis functions for
+#' @param Bfuncs a list of all basis functions
+#'
+#' @return The corresponding matrix of basis functions
+#' @export
+#'
+#' @examples
 make_B <- function(model, Bfuncs){
 
   num_Bfuncs = length(Bfuncs)
