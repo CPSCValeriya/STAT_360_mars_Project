@@ -6,6 +6,9 @@
 #' @family methods
 #'
 #' @examples
+#' ## Print output for fitting a mars to the mtcars data
+#' mtmars = mars(mpg~., data=mtcars, control=mars.control())
+#' print(mtmars)
 print.mars <- function(mars){
 
   class(mars) = class(mars)[2]; #get lm class

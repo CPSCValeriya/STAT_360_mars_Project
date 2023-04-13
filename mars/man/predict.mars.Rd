@@ -11,8 +11,15 @@
 
 \item{newdata}{optional data to use for prediction}
 }
+\value{
+a vector of prediction values
+}
 \description{
 Predict method for mars objects
+}
+\examples{
+mars.mod <-mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
+predict(mars.mod)
 }
 \seealso{
 Other methods: 

@@ -12,6 +12,11 @@
 \description{
 Print values for a mars Object
 }
+\examples{
+## Print output for fitting a mars to the mtcars data
+mtmars = mars(mpg~., data=mtcars, control=mars.control())
+print(mtmars)
+}
 \seealso{
 Other methods: 
 \code{\link{anova.mars}()},

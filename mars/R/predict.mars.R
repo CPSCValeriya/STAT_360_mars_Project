@@ -3,12 +3,15 @@
 #' @param object a mars object to use for prediction, usually created by mars()
 #' @param newdata optional data to use for prediction
 #'
-#' @return
+#' @return a vector of prediction values
 #' @export
 #'
-#' @examples
 #' @family methods
 #' @import crayon
+#' @examples
+#' mars.mod <-mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
+#' predict(mars.mod)
+
 predict.mars <- function(object,newdata) {
 
   cat(cyan$bold("Printing mars object prediction...\n\n"));

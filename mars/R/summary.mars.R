@@ -9,6 +9,9 @@
 #' @family methods
 #'
 #' @examples
+#' m <-mars(Ozone~Wind+Temp+Month,data=airquality,control=mars.control())
+#' summary(m)
+#'
 #' @importFrom stats summary.lm
 summary.mars <- function(mars){
 
