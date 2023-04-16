@@ -1,6 +1,6 @@
 # STAT 360 Project: Multivariate Adaptive Regression Spline (mars) Package
 
-### [**Contributors:**]{.underline}
+### Contributors:
 
 -   Christine Chuong
 
@@ -8,7 +8,7 @@
 
 -   Valeriya Kistrina
 
-### [List of files in project folder:]{.underline}
+### List of files in project folder:
 
 -   data
 
@@ -18,7 +18,7 @@
 -   data-raw
 
     -   DATASET.R - initial generated file for code to prepare
-        \`DATASET\` dataset (not used)
+        `DATASET` dataset (not used)
 
     -   marstestdata.R - code to prepare \`marstestdata\` dataset
         provided by instructor
@@ -62,7 +62,7 @@
 
 -   man (contains compiled Roxygen comments for all functions)
 
-### [**Contributions:**]{.underline}
+### Contributions:
 
 -   Christine Chuong: documentation, debugging, plot.mars
 
@@ -70,7 +70,7 @@
 
 -   Valeriya Kistrina: mars, mars object methods, helper functions
 
-### [**Other:**]{.underline}
+### Other:
 
 -   **Please run rm(list=ls()) followed by load_all() to start the
     project**
