@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # STAT 360 Project: Multivariate Adaptive Regression Spline (mars) Package
 
 ### [**Contributors:**]{.underline}
