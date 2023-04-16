@@ -1,12 +1,15 @@
 # STAT 360 Project: Multivariate Adaptive Regression Spline (mars) Package
 
-### Contributors:
+### Contributors and Contributions:
 
--   Christine Chuong
+-   **Christine Chuong**: documentation, debugging, plot.mars
 
--   Zenith (Robert) Tandava Yurkovich
+-   **Zenith (Robert) Tandava Yurkovich**: long form documentation, test suite
 
--   Valeriya Kistrina
+-   **Valeriya Kistrina**: mars, mars object methods, helper functions
+
+**Work was divided equally and work division was agreed upon and
+discussed.**
 
 ### List of files in project folder:
 
@@ -68,19 +71,8 @@
 
 -   DESCRIPTION - file containing information about the package
 
-### Contributions:
-
--   Christine Chuong: documentation, debugging, plot.mars
-
--   Zenith (Robert) Tandava Yurkovich: long form documentation, test
-    suite
-
--   Valeriya Kistrina: mars, mars object methods, helper functions
-
-**Work was divided equally and work division was agreed upon and
-discussed.**
-
 ### References:
+
 -   Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
 -   Wei, B. (2023). Lecture Material.
 
