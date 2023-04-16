@@ -1,12 +1,6 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # STAT 360 Project: Multivariate Adaptive Regression Spline (mars) Package
 
-### [**Contributors:**]{.underline}
+### Contributors:
 
 -   Christine Chuong
 
@@ -14,7 +8,7 @@ editor_options:
 
 -   Valeriya Kistrina
 
-### [List of files in project folder:]{.underline}
+### List of files in project folder:
 
 -   data
 
@@ -24,7 +18,7 @@ editor_options:
 -   data-raw
 
     -   DATASET.R - initial generated file for code to prepare
-        \`DATASET\` dataset (not used)
+        `DATASET` dataset (not used)
 
     -   marstestdata.R - code to prepare \`marstestdata\` dataset
         provided by instructor
@@ -74,7 +68,7 @@ editor_options:
 
 -   DESCRIPTION - file containing information about the package
 
-### [**Contributions:**]{.underline}
+### Contributions:
 
 -   Christine Chuong: documentation, debugging, plot.mars
 
@@ -86,7 +80,11 @@ editor_options:
 **Work was divided equally and work division was agreed upon and
 discussed.**
 
-### [**Other:**]{.underline}
+### References:
+-   Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
+-   Wei, B. (2023). Lecture Material.
+
+### Other:
 
 -   **Please run rm(list=ls()) followed by load_all() to start the
     project**
