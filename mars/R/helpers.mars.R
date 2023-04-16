@@ -1,10 +1,14 @@
 library(crayon)
-#' Print Basis Functions
+
+#' Print Basis Functions of mars object
 #'
+#' @title Print Basis Functions of mars objec
 #' @param mars a mars object, created using mars
-#'
+#' @import crayon
 #' @export
-#'
+#' @examples
+#' mtcars_mars = mars(mpg~., data=mtcars, control=mars.control());
+#' print_basis(mtcars_mars)
 print_basis = function(mars){
 
   num_Bfuncs = length(mars$Bfuncs)
@@ -42,12 +46,15 @@ print_basis = function(mars){
 
 }
 
-#' Print Product
+#' Print Product of mars object hinge functions
 #'
+#' @title Print Product of mars object hinge functions
 #' @param mars a mars object, created using mars
-#'
+#' @import crayon
 #' @export
-#'
+#' @examples
+#' mtcars_mars = mars(mpg~., data=mtcars, control=mars.control());
+#' print_product(mtcars_mars)
 print_product = function(mars){
 
 

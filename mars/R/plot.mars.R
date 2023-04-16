@@ -1,3 +1,4 @@
+#' Plot Diagnostics for a mars Object
 #'
 #' @title Plot Diagnostics for a mars Object
 #'
@@ -25,7 +26,6 @@
 #' ## Analysis of the car data found in mtcars
 #' ## Printing the cdf, fitted vs residual and q-q plot
 #' ## with 4 label points and green points
-#'
 #' m<-mars(form=mpg~.,data=mtcars,control=mars.control())
 #' plot(m,which=c(1,2,3),col="green",numpoints=4)
 #'
@@ -33,7 +33,6 @@
 #' @importFrom stats anova delete.response ecdf hatvalues lm model.frame model.matrix model.response
 #' residuals terms
 #' @family methods
-
 plot.mars<-function(mars,which=c(1,2,3,4),col="purple",numpoints=3,...){
   par(ask=T)
   class(mars) = class(mars)[2]; #get lm class

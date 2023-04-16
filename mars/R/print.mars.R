@@ -1,10 +1,9 @@
 #' Print values for a mars Object
 #'
 #' @param mars a mars object, usually created by mars
-#'
+#' @import crayon
 #' @export
 #' @family methods
-#'
 #' @examples
 #' ## Print output for fitting a mars to the mtcars data
 #' mtmars = mars(mpg~., data=mtcars, control=mars.control())

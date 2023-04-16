@@ -1,13 +1,14 @@
 #' Predict method for mars objects
 #'
-#' @param object a mars object to use for prediction, usually created by mars()
-#' @param newdata optional data to use for prediction
+#' Implementation of predict method for mars object
 #'
+#' @title Predict method for mars objects
+#' @param object a mars object to use for prediction, usually created by mars
+#' @param newdata optional data to use for prediction
 #' @return a vector of prediction values
 #' @family methods
 #' @export
 #' @import crayon
-#'
 #' @examples
 #' ## Predict values for iris data
 #' m <-mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
@@ -36,17 +37,15 @@ predict.mars <- function(object,newdata) {
 
 }
 
-
 #' Make B matrix
 #'
 #' Create set of basis functions using the Bfuncs list
 #'
+#' @title Make B matrix
 #' @param model a model to create basis functions for
 #' @param Bfuncs a list of all basis functions
-#'
 #' @return The corresponding matrix of basis functions
 #' @export
-#'
 make_B <- function(model, Bfuncs){
 
   num_Bfuncs = length(Bfuncs)
@@ -72,4 +71,3 @@ make_B <- function(model, Bfuncs){
   invisible(as.matrix(B))
 
 }
-

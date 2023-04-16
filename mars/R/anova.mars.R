@@ -1,13 +1,14 @@
 #' ANOVA for MARS Model Fits
 #'
-#' @param mars a mars object
+#' Implementation of ANOVA for mars object
 #'
+#' @title ANOVA for MARS Model Fits
+#' @param mars a mars object
+#' @import crayon
 #' @export
 #' @family methods
-#'
 #' @examples
-#'
-#' ## Analysing Ozone data
+#' ## Analyzing Ozone data with mars function
 #' m <-mars(Ozone~Wind+Temp+Month,data=airquality,control=mars.control())
 #' anova(m)
 anova.mars <- function(mars){
