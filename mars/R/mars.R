@@ -1,30 +1,25 @@
 #' Multivariate Adaptive Regression Splines (MARS)
 #'
-#' Fit Friedman's Multivariate Adaptive Regression Splines (MARS) model.
+#' Implementation of Fit Friedman's Multivariate Adaptive Regression
+#' Splines (MARS) model.
 #'
 #' @param formula an R formula
 #' @param data a data frame containing the a response variable and predictors
 #' @param control a mars.control object created using mars.control()
-#'
 #' @return An S3 model of class "mars"
-#'
 #' @references
-#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
-#'  1–67. https://doi.org/10.1214/aos/1176347963
-#'
+#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
+#' Wei, B. (2023). Lecture Material.
 #' @seealso
 #'\describe{
 #'\item{anova.mars}{}
 #'\item{plot.mars}{}
 #'\item{predict.mars}{}
 #'\item{print.mars}{}
-#'\item{summary.mars}{}
-#'}
-#'
+#'\item{summary.mars}{}}
 #' @export
 #' @examples
 #'## Analyzing flower value data found in the iris dataset
-#'
 #'mars.mod <- mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
 #'print(mars.mod)
 mars <- function(formula,data,control=mars.control()) {
@@ -46,23 +41,21 @@ mars <- function(formula,data,control=mars.control()) {
 
 #' Forward Stepwise
 #'
-#' Implementing algorithm 2 from the page 17 of the Friedman Paper
+#' Implementing Forward Stepwise algorithm (algorithm 2 from page 17 of the
+#' Friedman Paper)
+#'
 #' @param y vector of response values
 #' @param x dataset of predictor variables
 #' @param control mars.control object created by mars.control
-#'
 #' @return A list with elements
 #' \describe{
 #' \item{y The same vector of response values given as input}{}
 #' \item{B }{}
-#' \item{Bfuncs }{}
-#' }
+#' \item{Bfuncs }{}}
 #' @export
-#'
 #' @references
-#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
-#'  1–67. https://doi.org/10.1214/aos/1176347963
-#'
+#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
+#' Wei, B. (2023). Lecture Material.
 fwd_stepwise <- function(y,x,control=mars.control()){
 
   Mmax = control$Mmax;
@@ -84,7 +77,7 @@ fwd_stepwise <- function(y,x,control=mars.control()){
 
     for(m in 1:M) {
 
-      remaining_xvar = setdiff(1:n, Bfuncs[[m]][,2])
+      remaining_xvar = setdiff(1:n, Bfuncs[[m]][,2]) #Exclude already used predictors
 
       for(v in remaining_xvar){
 
@@ -115,7 +108,7 @@ fwd_stepwise <- function(y,x,control=mars.control()){
     #Save optimal (m, v, t) and update basis functions
     mstar <- splits[M,1]; vstar <- splits[M,2]; tstar <- splits[M,3]
 
-
+    #Print additional information if trace is true
     if(control$trace){
       cat("[Forward Stepwise] Best split: (basis: ",mstar,", variable: ", vstar, ", split point: ", round(tstar,2),", LOF: ", round(lof_best,2),")\n", sep="")
     }
@@ -136,27 +129,25 @@ fwd_stepwise <- function(y,x,control=mars.control()){
 
 #' Backwards Stepwise
 #'
-#' Implementation of algorithm 3 from page 17 of the Friedman paper
+#' Implementation of Backwards Stepwise algorithm (algorithm
+#' 3 from page 17 of the Friedman paper)
 #'
 #' @param fwd output created by running fwd_stepwise
 #' @param control mars.control object, created with mars.control
-#'
 #' @return A list with elements
 #' \describe{
 #' \item{y The same vector of response values given as input}{}
 #' \item{B }{}
 #' \item{Bfuncs }{}
 #' }
-#'
 #' @export
-#'
 #' @references
 #' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
 #'  1–67. https://doi.org/10.1214/aos/1176347963
+#' Wei, B. (2023). Lecture Material.
 bwd_stepwise <- function(fwd,control) {
 
   #Guidance from lecture material
-
   Mmax = ncol(fwd$B)-1
   jstar = 2:(Mmax+1)
   kstar = jstar
@@ -188,6 +179,7 @@ bwd_stepwise <- function(fwd,control) {
         lofstar = lof
         jstar = K
 
+        #Print additional information if trace is true
         if(control$trace){
           cat("[Backwards Stepwise] Updating basis set:", paste0("B",(jstar-1)), "\n")
         }
@@ -216,13 +208,11 @@ bwd_stepwise <- function(fwd,control) {
 #' @return lof, the lack of fit value for the linear model fit with the given data and formula
 #' @export
 #' @references
-#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
-#'  1–67. https://doi.org/10.1214/aos/1176347963
-
+#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
+#' Wei, B. (2023). Lecture Material.
 LOF <- function(form,data,control) {
 
   #Guidance from lecture material
-
   model <- lm(form,data)
   rss = (sum(residuals(model)^2))
   nrows = nrow(data)
@@ -243,9 +233,8 @@ LOF <- function(form,data,control) {
 #' @return if s=+1, this returns max(0,x-t); if s=-1, this return max(0,t-x)
 #' @export
 #' @references
-#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
-#'  1–67. https://doi.org/10.1214/aos/1176347963
-
+#' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
+#' Wei, B. (2023). Lecture Material.
 h <- function(x,s,t) {
   # if x>t, s=+1, this return max(0,x-t)
   # if x<t, s=-1, this return max(0,t-x)
@@ -262,13 +251,14 @@ h <- function(x,s,t) {
 #' @return a sorted list of unique split points where the basis function is positive,
 #' with the largest point removed
 #' @export
-#'
+#' @references
+#' Wei, B. (2023). Lecture Material.
 split_points <- function(xv,Bm) {
   out <- sort(unique(xv[Bm>0]))
   return(out[-length(out)])
 }
 
-#' Initialize B
+#' Initialize B matrix
 #'
 #' Initialize a matrix for all the basis functions
 #'
@@ -279,7 +269,8 @@ split_points <- function(xv,Bm) {
 #' NA for each basis function.
 #'
 #' @export
-#'
+#' @references
+#' Wei, B. (2023). Lecture Material.
 init_B <- function(N,Mmax) {
   B <- data.frame(matrix(NA,nrow=N,ncol=(Mmax+1)))
   B[,1] <- 1
@@ -287,11 +278,9 @@ init_B <- function(N,Mmax) {
   return(B)
 }
 
-
 #------------------------------------------------------------------------
 # constructor, validator and helper for class mars.control
 #------------------------------------------------------------------------
-#
 
 #' mars.control helper function
 #'
@@ -301,7 +290,6 @@ init_B <- function(N,Mmax) {
 #'
 #' @return a mars.control object
 #' @export
-#'
 new_mars.control <- function(control) {
   structure(control,class="mars.control")
 }
@@ -313,7 +301,8 @@ new_mars.control <- function(control) {
 #'
 #' @return a mars.control object
 #' @export
-#'
+#' @references
+#' Wei, B. (2023). Lecture Material.
 validate_mars.control <- function(control) {
   stopifnot(is.integer(control$Mmax),
             is.numeric(control$d),
@@ -336,16 +325,14 @@ validate_mars.control <- function(control) {
 #' parameters used in the model fitting procedure.
 #'
 #' @param Mmax Maximum number of basis functions. Should be an even integer. Default value is 2.
-#' @param d A smoothing parameter
-#' @param trace logical, if TRUE traceback??????
+#' @param d A smoothing parameter. Default value is 3.
+#' @param trace logical specifying whether more information should be printed to the user
 #' @export
-
+#' @references
+#' Wei, B. (2023). Lecture Material.
 mars.control <- function(Mmax=2,d=3,trace=FALSE) {
   Mmax <- as.integer(Mmax)
   control <- list(Mmax=Mmax,d=d,trace=trace)
   control <- validate_mars.control(control)
   new_mars.control(control)
 }
-
-
-
