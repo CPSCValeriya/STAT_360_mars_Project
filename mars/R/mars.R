@@ -27,7 +27,6 @@
 #'
 #'mars.mod <- mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
 #'print(mars.mod)
-
 mars <- function(formula,data,control=mars.control()) {
   cc <- match.call() # save the call
   mf <- model.frame(formula,data)
@@ -115,7 +114,11 @@ fwd_stepwise <- function(y,x,control=mars.control()){
 
     #Save optimal (m, v, t) and update basis functions
     mstar <- splits[M,1]; vstar <- splits[M,2]; tstar <- splits[M,3]
-    cat("[Info] best (m,v,t,lof): (",mstar,vstar,tstar,lof_best,")\n")
+
+
+    if(control$trace){
+      cat("[Forward Stepwise] Best split: (basis: ",mstar,", variable: ", vstar, ", split point: ", round(tstar,2),", LOF: ", round(lof_best,2),")\n", sep="")
+    }
 
     B[,M+1] <- B[,mstar]*h(x[,vstar],-1,tstar) #Add left child
     B[,M+2] <- B[,mstar]*h(x[,vstar],1,tstar) #Add right child
@@ -166,10 +169,6 @@ bwd_stepwise <- function(fwd,control) {
     b = Inf # Best LOF
     L = kstar # Temp copy of kstar
 
-    if(control$trace){
-     cat("L:", L, "\n")
-    }
-
     # Inner loop over model terms
     for(m in L){
 
@@ -188,6 +187,11 @@ bwd_stepwise <- function(fwd,control) {
       if(lof < lofstar){
         lofstar = lof
         jstar = K
+
+        if(control$trace){
+          cat("[Backwards Stepwise] Updating basis set:", paste0("B",(jstar-1)), "\n")
+        }
+
       }
 
     }
