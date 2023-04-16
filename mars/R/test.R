@@ -1,26 +1,31 @@
-load("C:/Users/Valerie/Downloads/STAT 360/mars_project/STAT_360_mars_Project/mars/tests/testthat/testmc.RData")
-load("C:/Users/Valerie/Downloads/STAT 360/mars_project/STAT_360_mars_Project/mars/tests/testthat/testmars.RData")
+#' Test suite file with three worked examples and non-trivial data
+#' Examples below show how a user can call mars()
+#' and illustrates the functions created for the MARS object
+#' Additional details can be found in the project documentation.
 
-#Test on provided dataset
-out = mars(y~.,data=marstestdata,control=testmc)
-out
-testmars
+#Load data
+# load("C:/Users/Valerie/Downloads/STAT 360/mars_project/STAT_360_mars_Project/mars/tests/testthat/testmc.RData")
+# load("C:/Users/Valerie/Downloads/STAT 360/mars_project/STAT_360_mars_Project/mars/tests/testthat/testmars.RData")
 
-anova(out)
-print(out)
-summary(out)
-print(out)
+#Test on mtcars dataset with default parameters
+mtcars_mars = mars(mpg~., data=mtcars, control=mars.control())
+anova(mtcars_mars)
+print(mtcars_mars)
+summary(mtcars_mars)
+print(mtcars_mars)
 
-#Test on mtcars dataset
-mtmars = mars(mpg~., data=mtcars, control=mars.control())
-mtmars
-plot(mtmars)
+#Test on provided dataset with default parameters
+mars_out = mars(y~.,data=marstestdata,control=testmc)
+anova(mars_out)
+print(mars_out)
+summary(mars_out)
+print(mars_out)
 
-mtmars = mars(mpg~., data=mtcars)
-mtmars
+#Test on provided dataset with specified arguments
+mars_test = mars(y~.,data=marstestdata,control=mars.control(Mmax=6,d=3,trace=TRUE))
+mars_test
+anova(mars_test)
+print(mars_test)
+summary(mars_test)
+print(mars_test)
 
-#Test with earth
-library(earth)
-mtearth <- earth(mpg~., data=mtcars)
-summary(mtearth, style = "pmax")
-summary(mtearth)

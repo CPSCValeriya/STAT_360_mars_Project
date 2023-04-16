@@ -1,0 +1,131 @@
+---
+title: "Multivariate Adaptive Regression Splines"
+author: "Zenith (Robert) Tandava Yurkovich, Valeriya Kistrina"
+date: "2023-04-16"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### MARS package GitHub Repo link: <https://github.com/CPSCValeriya/STAT_360_mars_Project>
+
+## Description
+
+mars, which stands for Multivariate Adaptive Regression Spline, is used to apply a regression model to a given set of data. In doing so, the function analyzes the dataset and creates numerous knots: points at which the fitted model will change.
+
+## Usage
+
+```{r eval=FALSE}
+#With default parameters
+mars(formula, data, control=mars.control())
+
+#With specified arguments
+mars(formula, data, control=mars.control(Mmax=3, d=2, trace=TRUE))
+```
+
+## Arguments
+
+-   **formula**: an object of class "formula" (or one that can be coerced to that class): a symbolic description of the model to be fitted
+
+-   **data:** a data frame that contains the data on which we wish to apply the mars() function
+
+-   **control**: an object of class mars.control. If unspecified, will be defaulted to a mars.control object with Mmax = 2, and d = 3 (see Details for explanation of these parameters)
+
+## Details
+
+Although many other R functions (such as lm() and glm()) can be used to fit a regression models onto datasets, mars() differs in several ways. Most notably, mars() is non-parametric unlike the aforementioned functions which return models with predictor and response variables. Instead, mars() analyzes the dataset and creates numerous break points at which, the model changes hence, adaptive splines. As such, the model produced by the mars() function is piecewise, unlike the outputs of the lm() and glm() functions. Nevertheless, there do exist important similarities between other model fitting functions and mars(). Notably, the formula input is present in mars, lm, and glm, which means that all of the attributes of the formula class can be applied to the formula argument for mars (see ?lm or ?glm)
+
+The points at which the function splits and create a new spline are determined by partitioning the dataset to minimize a lack-of-fit (LOF) function (see Friedman paper for more details).
+
+The knots produced by the mars function can be influenced by the user via the control argument. The control argument, which is of class mars.control, has two main components: Mmax, and d.
+
+-   **Mmax:** a positive even integer argument that specifies the maximum number of splines that our output model can have
+
+-   **d**: a parameter that affects the LOF function and thereby affects how many knots are produced. In general, a larger d value will result in a smaller number of knots in the output of the mars function
+
+## **Value**
+
+The mars() function returns an object of class mars. The mars object is a list containing at least the following components (as well as the components of its parent class lm):
+
+-   **y:** the formula's response variable's values\
+
+-   **B:** a matrix of values by which the coefficients will be multiplied (see also coefficients)\
+
+-   **Bfuncs:** a list containing the knot points
+
+-   **call:** the call of the mars function with the given inputs\
+
+-   **formula:** the formula argument of the mars function\
+
+-   **x_names:** a list of all of the predictor variable names\
+
+-   **coefficients**: a vector of coefficient values, which will be multiplied by the B matrix\
+
+-   **residuals:** the response minus the fitted values\
+
+-   **rank**: the numerical rank of the fitted model\
+
+-   **fitted.values**: the fitted model values\
+
+-   **df.residual:** the residual degrees of freedom\
+
+-   **xlevels**: the levels of the response variables (if applicable)\
+
+-   **terms**: general information about the model, its coefficients, and its response\
+
+-   **model**: a matrix which is the column vector y column bound to the matrix B\
+
+## Authors
+
+Valeriya (Valerie) Kistrina, Christine Chuong, Zenith (Robert) Tandava Yurkovich
+
+## References
+
+Friedman, J. H. (1991). Multivariate Adaptive Regression Splines, The Annals of Statistics, Vol. 19, No. 1, pp. 1-67
+
+Milborrow, S. H., Hastie, T., Tibshirani, R., Miller, A., & Lumley, T. (2021). earth: Multivariate Adaptive Regression Splines, R package version 5.3.1.
+
+Wei, B. (2023). Lecture Material.
+
+## See Also
+
+-   **print.mars:** prints out a user-friendly output of the mars object details (includes the coefficients, basis functions, product and call)
+
+-   **summary.mars:** provides a detailed summary of the mars model object (includes the coefficients, basis functions, residuals, additional statistics and other)
+
+-   **anova.mars:** prints the Analysis of Variance Table (ANOVA) and details on the corresponding mars object
+
+-   **predict.mars:** generates a prediction, obtaining estimated values of the response variable given a different dataset and mars model object
+
+-   **plot.mars:** generates four different plots based on the provided mars object (Residuals vs. Fitted, Quantile-Quantile, Scale-Location, and Residuals vs. Leverage)
+
+## Examples
+
+Below is a collection of examples on how to use the mars function and methods written for its output:
+
+```{r}
+
+# Applying predict.mars
+m <-mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
+predict(m)
+#
+#Returns the "fitted.values" component of m since dataset is unchanged
+
+#Altering the dataset to see the how the prediction changes:
+iris2 = iris
+#Adding noise terms to the explanatory variables
+set.seed(123)
+iris2$Sepal.Width = round(iris$Sepal.Width + rnorm(150),1)
+iris2$Petal.Length = round(iris$Petal.Length + rnorm(150),1)
+iris2$Petal.Width = round(iris$Petal.Width + rnorm(150, sd = 0.1)+0.2,1)
+head(iris2)
+
+#New predicted values
+predict.mars(m,iris2)
+#Difference between predicted values and 
+predict.mars(m)-predict.mars(m,iris2)
+```
