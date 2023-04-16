@@ -4,8 +4,8 @@
 #' Additional details can be found in the project documentation.
 
 #Load data
-# load("C:/Users/Valerie/Downloads/STAT 360/mars_project/STAT_360_mars_Project/mars/tests/testthat/testmc.RData")
-# load("C:/Users/Valerie/Downloads/STAT 360/mars_project/STAT_360_mars_Project/mars/tests/testthat/testmars.RData")
+load("tests/testthat/testmc.RData")
+load("tests/testthat/testmars.RData")
 
 #Test on mtcars dataset with default parameters
 mtcars_mars = mars(mpg~., data=mtcars, control=mars.control())
