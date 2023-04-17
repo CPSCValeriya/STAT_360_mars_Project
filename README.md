@@ -1,7 +1,3 @@
----
----
----
-
 # STAT 360 Project: Multivariate Adaptive Regression Spline (mars) Package
 
 ### Install:

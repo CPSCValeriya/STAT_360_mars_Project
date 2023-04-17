@@ -3,7 +3,6 @@ title: "Multivariate Adaptive Regression Splines"
 author: "Zenith (Robert) Tandava Yurkovich, Valeriya Kistrina"
 date: "2023-04-16"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
 ---
@@ -242,4 +241,3 @@ plot(Car.mars, numpoints=50)
 #A combination of parameters can be specified:
 plot(Car.mars, which=c(1,2,3),col="orange",numpoints=40)
 ```
-

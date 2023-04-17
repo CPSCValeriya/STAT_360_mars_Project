@@ -1,0 +1,23 @@
+Package: mars
+Type: Package
+Title: Multivariate Adaptive Regression Splines
+Version: 0.1.0
+Author: Valeriya (Valerie) Kistrina, Christine Chuong, Zenith (Robert) Tandava Yurkovich 
+Maintainer: Valeriya (Valerie) Kistrina <vkistrin@sfu.ca>, Christine Chuong <cchuong@sfu.ca>, Zenith (Robert) Tandava Yurkovich <zyurkovi@sfu.ca> 
+Description: Multivariate Adaptive Regression Splines ()
+    is used to apply a regression model to a given set of data. 
+    In doing so, the function analyzes the dataset and creates 
+    numerous break points at which the fitted model will change.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.1
+Imports: crayon
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)
