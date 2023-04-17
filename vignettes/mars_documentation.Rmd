@@ -17,7 +17,7 @@ library(mars)
 
 -   MARS package GitHub Repo link: [https://github.com/CPSCValeriya/STAT_360_mars_Project](https://github.com/CPSCValeriya/STAT_360_mars_Project/tree/main/mars){.uri}
 
--   Please use: install_github(repo="CPSCValeriya/STAT_360_mars_Project")
+-   Please use: \texttt{install\_github(repo="CPSCValeriya/STAT\_360\_mars\_Project")}
 
 -   We recommend to run **\texttt{rm(list=ls())}** followed by **\texttt{load_all()}** to run the package source code
 
