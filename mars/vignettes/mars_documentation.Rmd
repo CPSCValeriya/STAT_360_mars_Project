@@ -17,6 +17,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Please use: install_github(repo="CPSCValeriya/STAT_360_mars_Project/mars")
 
+**We recommend the viewer to run rm(list=ls()) to clear their environment before running our package. Steps we have followed have been clearing the environment and running load_all()**
+
 ## Description
 
 mars, which stands for Multivariate Adaptive Regression Spline, is used to apply a regression model to a given set of data. In doing so, the function analyzes the dataset and creates numerous knots: points at which the fitted model will change.
@@ -53,35 +55,35 @@ The knots produced by the mars function can be influenced by the user via the co
 
 ## **Value**
 
-The mars() function returns an object of class mars. The mars object is a list containing at least the following components (as well as the components of its parent class lm):
+The mars() function returns an object of class mars. The mars object is a list containing at least the following components (as well as the components of its parent class lm which are not all listed):
 
--   **y:** the formula's response variable's values\
+-   **y:** the formula's response variable's values
 
--   **B:** a matrix of values by which the coefficients will be multiplied (see also coefficients)\
+-   **B:** a matrix of values by which the coefficients will be multiplied (see also coefficients)
 
 -   **Bfuncs:** a list containing the knot points
 
--   **call:** the call of the mars function with the given inputs\
+-   **call:** the call of the mars function with the given inputs
 
--   **formula:** the formula argument of the mars function\
+-   **formula:** the formula argument of the mars function
 
--   **x_names:** a list of all of the predictor variable names\
+-   **x_names:** a list of all of the predictor variable names
 
--   **coefficients**: a vector of coefficient values, which will be multiplied by the B matrix\
+-   **coefficients**: a vector of coefficient values, which will be multiplied by the B matrix
 
--   **residuals:** the response minus the fitted values\
+-   **residuals:** the response minus the fitted values
 
--   **rank**: the numerical rank of the fitted model\
+-   **rank**: the numerical rank of the fitted model
 
--   **fitted.values**: the fitted model values\
+-   **fitted.values**: the fitted model values
 
--   **df.residual:** the residual degrees of freedom\
+-   **df.residual:** the residual degrees of freedom
 
--   **xlevels**: the levels of the response variables (if applicable)\
+-   **xlevels**: the levels of the response variables (if applicable)
 
--   **terms**: general information about the model, its coefficients, and its response\
+-   **terms**: general information about the model, its coefficients, and its response
 
--   **model**: a matrix which is the column vector y column bound to the matrix B\
+-   **model**: a matrix which is the column vector y column bound to the matrix B
 
 ## Authors
 
@@ -93,7 +95,7 @@ Friedman, J. H. (1991). Multivariate Adaptive Regression Splines, The Annals of 
 
 Milborrow, S. H., Hastie, T., Tibshirani, R., Miller, A., & Lumley, T. (2021). earth: Multivariate Adaptive Regression Splines, R package version 5.3.1.
 
-Wei, B. (2023). Lecture Material.
+Lin, W. (2023). Lecture Material.
 
 ## See Also
 
@@ -111,25 +113,131 @@ Wei, B. (2023). Lecture Material.
 
 Below is a collection of examples on how to use the mars function and methods written for its output:
 
+#### Example 1.1: Utilizing the mars() function with Boston city data from the MASS package
+
+-   Please note: an increase in Mmax increases the time required to return the mars output
+
 ```{r}
+library(MASS)
 
-# Applying predict.mars
-m <-mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,control=mars.control())
-predict(m)
-#
-#Returns the "fitted.values" component of m since dataset is unchanged
+#Using the mars() function with default control values
+Boston.mars1 = mars(crim~age+nox+rm+dis+tax, Boston, control = mars.control())
 
-#Altering the dataset to see the how the prediction changes:
+#Running mars() function but changing the control argument
+#Mmax is increased (2 -> 10) and d is decreased (3 -> 2)
+#These two will lead to more knots than Boston.mars1
+#See use of trace = TRUE to print progress details 
+Boston.mars2 = mars(crim~age+nox+rm+dis+tax, Boston,
+                    control = mars.control(Mmax = 6, d = 2, trace = TRUE))
+```
+
+#### Example 1.2: Utilizing the mars() object methods (print, summary, anova)
+
+-   See Example 2 for predict function and Example 3 for plot function
+
+```{r}
+#Method 1: print
+cat("Boston.mars1 object -------------------------------\n\n");
+print(Boston.mars1) # Shows 2 B coefficients
+cat("\nBoston.mars1 object -------------------------------\n\n");
+print(Boston.mars2) # Shows 5 B coefficients
+```
+
+```{r}
+#Method 2: summary
+cat("Boston.mars1 object -------------------------------\n\n");
+summary(Boston.mars1)
+cat("\nBoston.mars2 object -------------------------------\n\n");
+summary(Boston.mars2)
+```
+
+```{r}
+#Method 3: anova
+cat("Boston.mars1 object -------------------------------\n\n");
+anova(Boston.mars1)
+cat("\nBoston.mars2 object -------------------------------\n\n");
+anova(Boston.mars2)
+```
+
+#### Example 2: Utilizing the predict method with the Iris data set 
+
+```{r}
+#Calling mars with default parameters and applying predict.mars
+Iris.Mars <-mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,
+                 data=iris,control=mars.control())
+
+#Returns the "fitted.values" component of Iris.mars since data set is unchanged
+prediction_iris_no_noise = predict(Iris.Mars)
+print(prediction_iris_no_noise)
+```
+
+```{r}
+#Altering the data set to see the how the prediction changes by adding noise terms to the explanatory variables
 iris2 = iris
-#Adding noise terms to the explanatory variables
 set.seed(123)
 iris2$Sepal.Width = round(iris$Sepal.Width + rnorm(150),1)
 iris2$Petal.Length = round(iris$Petal.Length + rnorm(150),1)
 iris2$Petal.Width = round(iris$Petal.Width + rnorm(150, sd = 0.1)+0.2,1)
-head(iris2)
 
-#New predicted values
-predict.mars(m,iris2)
-#Difference between predicted values and 
-predict.mars(m)-predict.mars(m,iris2)
+#New predicted values on dataset with noise
+prediction_iris_with_noise = predict(Iris.Mars,iris2)
+print(prediction_iris_with_noise)
+```
+
+#### Example 3.1: Using default plot on mars objects with Cars93 data from the MASS package
+
+-   Please note: Hit \<Return\> to see the plots
+
+```{r}
+#Calling mars with specified parameters (Mmax = 6, d = 3, trace = FALSE)\n")
+Car.mars = mars(Rev.per.mile~EngineSize+Horsepower+RPM+as.factor(Origin)+
+                  Fuel.tank.capacity+MPG.city+MPG.highway,
+                data = Cars93, mars.control(Mmax = 6, d = 3, trace = FALSE))
+
+#Plotting default plot (cycles through the 4 plots that plot.mars produces)
+cat("\nplot with default arguments\n")
+plot(Car.mars)
+```
+
+#### Example 3.2: Plot with additional arguments on mars objects with Cars93 data 
+
+```{r}
+#Additional parameters that can be altered include: which, col, numpoints
+
+#which: plots can be done individually by specifying their index
+#'1 = "CDF" plot of absolute value of residuals
+#'2 = "Residual vs Fitted" plot
+#'3 = "Normal Q-Q" plot
+#'4 = "Scale-Location" plot
+
+#Specify '1' for the Cumulative Distribution plot
+cat("\n1= Cumulative Distribution plot\n")
+plot(Car.mars, which = 1)
+
+#Specify '2' for the Residuals vs. Fitted plot
+cat("\n2= Residuals vs. Fitted plot\n")
+plot(Car.mars, which = 2)
+
+#Specify '3' for the Normal Q-Q plot
+cat("\n3 = Normal Q-Q plot\n")
+plot(Car.mars, which = 3)
+
+#Specify '4' for the Scale-Location plot
+cat("\n4 = Scale-Location plot\n")
+plot(Car.mars, which = 4)
+```
+
+```{r}
+#col: specify a colour of the points. Purple by default.
+plot(Car.mars, col="blue")
+```
+
+```{r}
+#numpoints: how many of the largest absolute value points to plot
+plot(Car.mars, numpoints=50)
+```
+
+```{r}
+#A combination of parameters can be specified:
+plot(Car.mars, which=c(1,2,3),col="orange",numpoints=40)
 ```

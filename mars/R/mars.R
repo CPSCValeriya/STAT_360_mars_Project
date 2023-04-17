@@ -9,7 +9,7 @@
 #' @return An S3 model of class "mars"
 #' @references
 #' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
-#' Wei, B. (2023). Lecture Material.
+#' Lin, W. (2023). Lecture Material.
 #' @seealso
 #'\describe{
 #'\item{anova.mars}{}
@@ -55,7 +55,7 @@ mars <- function(formula,data,control=mars.control()) {
 #' @export
 #' @references
 #' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
-#' Wei, B. (2023). Lecture Material.
+#' Lin, W. (2023). Lecture Material.
 fwd_stepwise <- function(y,x,control=mars.control()){
 
   Mmax = control$Mmax;
@@ -144,7 +144,7 @@ fwd_stepwise <- function(y,x,control=mars.control()){
 #' @references
 #' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
 #'  1–67. https://doi.org/10.1214/aos/1176347963
-#' Wei, B. (2023). Lecture Material.
+#' Lin, W. (2023). Lecture Material.
 bwd_stepwise <- function(fwd,control) {
 
   #Guidance from lecture material
@@ -209,7 +209,7 @@ bwd_stepwise <- function(fwd,control) {
 #' @export
 #' @references
 #' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
-#' Wei, B. (2023). Lecture Material.
+#' Lin, W. (2023). Lecture Material.
 LOF <- function(form,data,control) {
 
   #Guidance from lecture material
@@ -234,7 +234,7 @@ LOF <- function(form,data,control) {
 #' @export
 #' @references
 #' Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
-#' Wei, B. (2023). Lecture Material.
+#' Lin, W. (2023). Lecture Material.
 h <- function(x,s,t) {
   # if x>t, s=+1, this return max(0,x-t)
   # if x<t, s=-1, this return max(0,t-x)
@@ -252,7 +252,7 @@ h <- function(x,s,t) {
 #' with the largest point removed
 #' @export
 #' @references
-#' Wei, B. (2023). Lecture Material.
+#' Lin, W. (2023). Lecture Material.
 split_points <- function(xv,Bm) {
   out <- sort(unique(xv[Bm>0]))
   return(out[-length(out)])
@@ -270,7 +270,7 @@ split_points <- function(xv,Bm) {
 #'
 #' @export
 #' @references
-#' Wei, B. (2023). Lecture Material.
+#' Lin, W. (2023). Lecture Material.
 init_B <- function(N,Mmax) {
   B <- data.frame(matrix(NA,nrow=N,ncol=(Mmax+1)))
   B[,1] <- 1
@@ -302,7 +302,7 @@ new_mars.control <- function(control) {
 #' @return a mars.control object
 #' @export
 #' @references
-#' Wei, B. (2023). Lecture Material.
+#' Lin, W. (2023). Lecture Material.
 validate_mars.control <- function(control) {
   stopifnot(is.integer(control$Mmax),
             is.numeric(control$d),
@@ -329,7 +329,7 @@ validate_mars.control <- function(control) {
 #' @param trace logical specifying whether more information should be printed to the user
 #' @export
 #' @references
-#' Wei, B. (2023). Lecture Material.
+#' Lin, W. (2023). Lecture Material.
 mars.control <- function(Mmax=2,d=3,trace=FALSE) {
   Mmax <- as.integer(Mmax)
   control <- list(Mmax=Mmax,d=d,trace=trace)
