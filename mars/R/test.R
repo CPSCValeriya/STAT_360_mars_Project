@@ -5,6 +5,17 @@
 
 library(MASS)
 
+#Example 0: Provided data set -------------------------------------------------
+
+load("tests/testthat/testmc.RData")
+load("tests/testthat/testmars.RData")
+cat("\nExample 0: mars() function with provided dataset\n")
+mars_out = mars(y~.,data=marstestdata,control=testmc)
+anova(mars_out)
+print(mars_out)
+summary(mars_out)
+plot(mars_out)
+
 #Example 1: Boston city data from the MASS package ----------------------------
 
 cat("Example 1: mars() function with Boston city data from the MASS package\n")
