@@ -12,7 +12,7 @@
 
 -   **Zenith (Robert) Tandava Yurkovich**: long form documentation, test suite
 
--   **Valeriya Kistrina**: mars, mars object methods, helper functions
+-   **Valeriya Kistrina**: mars, mars object methods, helper functions, documentation
 
 **Work was divided equally and work division was agreed upon and discussed.**
 
