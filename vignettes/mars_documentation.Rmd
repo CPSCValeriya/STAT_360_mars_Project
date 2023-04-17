@@ -33,7 +33,7 @@ library(mars)
 #With default parameters
 mars(formula, data, control=mars.control())
 #With specified arguments
-mars(formula, data, control=mars.control(Mmax=3, d=2, trace=TRUE))
+mars(formula, data, control=mars.control(Mmax=4, d=2, trace=TRUE))
 ```
 
 ## Arguments
