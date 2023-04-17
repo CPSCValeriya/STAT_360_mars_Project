@@ -3,9 +3,9 @@ title: "Multivariate Adaptive Regression Splines"
 author: "Zenith (Robert) Tandava Yurkovich, Valeriya Kistrina, Christine Chuong"
 date: "2023-04-16"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -19,73 +19,80 @@ library(mars)
 
 -   Please use: install_github(repo="CPSCValeriya/STAT_360_mars_Project")
 
--   We recommend to run **rm(list=ls())** followed by **load_all()** to run the package source code
+-   We recommend to run **\texttt{rm(list=ls())}** followed by **\texttt{load_all()}** to run the package source code
 
 ## Description
 
-mars, which stands for Multivariate Adaptive Regression Spline, is used to apply a regression model to a given set of data. In doing so, the function analyzes the dataset and creates numerous knots: points at which the fitted model will change.
+```{=Latex}
+\texttt{mars}, which stands for Multivariate Adaptive Regression Splines, is used to apply a regression model to a given set of data. In doing so, the function analyzes the dataset and creates numerous knots: points at which the fitted model will change.
+```
 
 ## Usage
 
 ```{r eval=FALSE}
 #With default parameters
 mars(formula, data, control=mars.control())
-
 #With specified arguments
-mars(formula, data, control=mars.control(Mmax=3, d=2, trace=TRUE))
+mars(formula, data, control=mars.control(Mmax=4, d=2, trace=TRUE))
 ```
 
 ## Arguments
 
--   **formula**: an object of class "formula" (or one that can be coerced to that class): a symbolic description of the model to be fitted
+-   **\texttt{formula}**: an object of class "\texttt{formula}" (or one that can be coerced to that class): a symbolic description of the model to be fitted
 
--   **data:** a data frame that contains the data on which we wish to apply the mars() function
+-   **\texttt{data}**: a data frame that contains the data on which we wish to apply the \texttt{mars} function
 
--   **control**: an object of class mars.control. If unspecified, will be defaulted to a mars.control object with Mmax = 2, and d = 3 (see Details for explanation of these parameters)
+-   **\texttt{control}**: an object of class \texttt{mars.control}. If unspecified, will be defaulted to a \texttt{mars.control} object with \texttt{Mmax = 2}, \texttt{d = 3}, and \texttt{trace = FALSE} (see Details for explanation of these parameters)
 
 ## Details
 
-Although many other R functions (such as lm() and glm()) can be used to fit a regression models onto datasets, mars() differs in several ways. Most notably, mars() is non-parametric unlike the aforementioned functions which return models with predictor and response variables. Instead, mars() analyzes the dataset and creates numerous break points at which, the model changes hence, adaptive splines. As such, the model produced by the mars() function is piecewise, unlike the outputs of the lm() and glm() functions. Nevertheless, there do exist important similarities between other model fitting functions and mars(). Notably, the formula input is present in mars, lm, and glm, which means that all of the attributes of the formula class can be applied to the formula argument for mars (see ?lm or ?glm)
+```{=Latex}
+Although many other R functions, such as \texttt{lm} and \texttt{glm} can be used to fit a regression models onto datasets, \texttt{mars} differs in several ways. Most notably, \texttt{mars} is non-parametric unlike the aforementioned functions which return models where the predictor is a function of the response variables. Instead, \texttt{mars} analyzes the dataset and creates numerous knots at which, the model changes hence, adaptive splines. As such, the model produced by the \texttt{mars} function is piecewise, unlike the outputs of the \texttt{lm} and \texttt{glm} functions. Nevertheless, there do exist important similarities between other model fitting functions and \texttt{mars}. Notably, the \texttt{formula} argument is present in \texttt{mars}, \texttt{lm}, and \texttt{glm}, which means that all of the attributes of the \texttt{formula} class can be applied to the \texttt{formula} argument for \texttt{mars} (see \texttt{?lm} or \texttt{?glm} for more details)\par
 
-The points at which the function splits and create a new spline are determined by partitioning the dataset to minimize a lack-of-fit (LOF) function (see Friedman paper for more details).
+The knots at which the function splits and create a new spline are determined by partitioning the dataset to minimize a lack-of-fit (LOF) function. This same forward and backward partitioning also creates the basis matrix, which is returned by \texttt{mars()} and is used to fit the model. For more information on the way in which partitioning gives the knots and basis matrix as well as more information on the basis matrix, see the Friedman paper.\par
 
-The knots produced by the mars function can be influenced by the user via the control argument. The control argument, which is of class mars.control, has two main components: Mmax, and d.
+In addition to the basis matrix and knots, \texttt{mars} also calls \texttt{lm} in order to obtain coefficients for each of the columns of the basis matrix.
 
--   **Mmax:** a positive even integer argument that specifies the maximum number of splines that our output model can have
+The knots produced by \texttt{mars} can be influenced by the user via the \texttt{control} argument. \texttt{control}, which is of class \texttt{mars.control}, has three main arguments: \texttt{Mmax}, \texttt{d}, and \texttt{trace}.
+```
 
--   **d**: a parameter that affects the LOF function and thereby affects how many knots are produced. In general, a larger d value will result in a smaller number of knots in the output of the mars function
+-   **\texttt{Mmax}**: a positive even integer argument that specifies the maximum number of splines that our output model can have
+
+-   **\texttt{d}**: a parameter that affects the LOF function and thereby affects how many knots are produced. In general, a larger \texttt{d} value will result in a smaller number of knots in the output of the mars function; although, sometimes an increase in \texttt{d} will not affect the number of knots.
+
+-   **\texttt{trace}**: a logical argument that is set to \texttt{FALSE} by default. If set to \texttt{TRUE}, the program will provide additional information as the knots are created.
 
 ## Value
 
-The mars() function returns an object of class mars. The mars object is a list containing at least the following components (as well as the components of its parent class lm which are not all listed):
+The \texttt{mars} function returns an object of class \texttt{mars}. The \texttt{mars} object is a list containing at least the following components (as well as the components of its parent class \texttt{lm} which are not all listed):
 
--   **y:** the formula's response variable's values
+-   **\texttt{y}**: the formula's response variable's values
 
--   **B:** a matrix of values by which the coefficients will be multiplied (see also coefficients)
+-   **\texttt{B}**: a matrix of values by which the coefficients will be multiplied (see also coefficients)
 
--   **Bfuncs:** a list containing the knot points
+-   **\texttt{Bfuncs}**: a list containing the knot points
 
--   **call:** the call of the mars function with the given inputs
+-   **\texttt{call}**: the call of the mars function with the given inputs
 
--   **formula:** the formula argument of the mars function
+-   **\texttt{formula}**: the formula argument of the mars function
 
--   **x_names:** a list of all of the predictor variable names
+-   **\texttt{x\_names}**: a list of all of the predictor variable names
 
--   **coefficients**: a vector of coefficient values, which will be multiplied by the B matrix
+-   **\texttt{coefficients}**: a vector of coefficient values, which will be multiplied by the matrix \texttt{B}
 
--   **residuals:** the response minus the fitted values
+-   **\texttt{residuals}**: the response minus the fitted values
 
--   **rank**: the numerical rank of the fitted model
+-   **\texttt{rank}**: the numerical rank of the fitted model
 
--   **fitted.values**: the fitted model values
+-   **\texttt{fitted.values}**: the fitted model values
 
--   **df.residual:** the residual degrees of freedom
+-   **\texttt{df.residual}**: the residual degrees of freedom
 
--   **xlevels**: the levels of the response variables (if applicable)
+-   **\texttt{xlevels}**: the levels of the response variables (if applicable)
 
--   **terms**: general information about the model, its coefficients, and its response
+-   **\texttt{terms}**: general information about the model, its coefficients, and its response
 
--   **model**: a matrix which is the column vector y column bound to the matrix B
+-   **\texttt{model}**: a matrix which is the column vector \texttt{y} column bound to the matrix \texttt{B}
 
 ## Authors
 
@@ -99,38 +106,50 @@ Milborrow, S. H., Hastie, T., Tibshirani, R., Miller, A., & Lumley, T. (2021). e
 
 Lin, W. (2023). Lecture Material.
 
+R Core Team (2022). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria.
+
 ## See Also
 
--   **print.mars(mars_object):** prints out a user-friendly output of the mars object details (includes the coefficients, basis functions, product and call)
+-   **\texttt{print.mars(mars\_object)}**: prints out a user-friendly output of the mars object details (includes the coefficients, basis functions, product, and call)
 
--   **summary.mars(mars_object):** outputs a detailed summary of the mars model object (includes the coefficients, basis functions, residuals, additional statistics and other)
+-   **\texttt{summary.mars(mars\_object)}**: outputs a detailed summary of the mars model object (includes the coefficients, basis functions, residuals, additional statistics, and other)
 
--   **anova.mars(mars_object):** prints the Analysis of Variance Table (ANOVA) and details on the corresponding mars object
+-   **\texttt{anova.mars(mars\_object)}**: prints the Analysis of Variance Table (ANOVA) and details on the corresponding mars object
 
--   **predict.mars(mars_object, newdata):** outputs a prediction, obtaining estimated values of the response variable given a different dataset and mars model object. newdata argument is optional.
+-   **\texttt{predict.mars(mars\_object, newdata)}**: outputs a prediction, obtaining estimated values of the response variable given a different dataset and mars model object. \texttt{newdata} argument is optional.
 
--   **plot.mars(mars_object,** **mars, which=c(1,2,3,4), col="purple", numpoints=3,\...):** generates four different plots based on the provided mars object (Residuals vs. Fitted, Quantile-Quantile, Scale-Location, and Residuals vs. Leverage). The user can specify a combination of the passed in parameters: 'which' specifies a subset of plots to output, 'col' specifies a color for the line in the cdf plot or the points n the remaining points, and 'numpoints' specifies how many of the largest absolute value points to plot
+-   **\texttt{plot.mars(mars\_object, which=c(1,2,3,4), col="purple", numpoints=3,\...)}**: generates four different plots based on the provided mars object (Residuals vs. Fitted, Quantile-Quantile, Scale-Location, and Residuals vs. Leverage). The user can specify a combination of the passed in parameters: '\texttt{which}' specifies a subset of plots to output, '\texttt{col}' specifies a color for the line in the cdf plot or the points n the remaining points, and '\texttt{numpoints}' specifies how many of the largest absolute value points to plot
 
--   **print_product(mars_object):** helper function to print the basis functions of the mars object
+-   **\texttt{print\_product(mars\_object)}**: helper function to print the basis functions of the mars object
 
--   **print_basis(mars_object):** helper function to print the mars object product of hinge functions
+-   **\texttt{print\_basis(mars\_object)}**: helper function to print the mars object product of hinge functions
 
 ## Examples
 
 Below is a collection of examples on how to use the mars function and methods written for its output:
 
+### Table of Contents:
+
+- **Example 1**:
+  + Example 1.1: Utilizing the mars() function with Boston city data from the MASS package
+  + Example 1.2: Utilizing the mars() object methods (print, summary, anova)
+- **Example 2**: Utilizing the predict method with the Iris data set
+- **Example 3**:
+  + Example 3.1: Using default plot on mars objects with Cars93 data from the MASS package
+  + Example 3.2: Plot with additional arguments on mars objects with Cars93 data
+
+
+
 ### Example 1.1: Utilizing the mars() function with Boston city data from the MASS package
 
--   Please note: an increase in Mmax increases the time required to return the mars output
+-   Please note: an increase in \texttt{Mmax} increases the time required to return the mars output
 
 ```{r}
 library(MASS)
-
 #Using the mars() function with default control values
 Boston.mars1 = mars(crim~age+nox+rm+dis+tax, Boston, control = mars.control())
-
 #Running mars() function but changing the control argument
-#Mmax is increased (2 -> 10) and d is decreased (3 -> 2)
+#Mmax is increased (2 -> 4) and d is decreased (3 -> 2)
 #These two will lead to more knots than Boston.mars1
 #See use of trace = TRUE to print progress details 
 Boston.mars2 = mars(crim~age+nox+rm+dis+tax, Boston,
@@ -143,13 +162,13 @@ Boston.mars2 = mars(crim~age+nox+rm+dis+tax, Boston,
 
 #### Method 1: print(mars_object)
 
-Boston.mars1 object
+\texttt{Boston.mars1} object
 
 ```{r}
 print(Boston.mars1) # Shows 2 B coefficients
 ```
 
-Boston.mars2 object
+\texttt{Boston.mars2} object
 
 ```{r}
 print(Boston.mars2) # Shows 3 B coefficients
@@ -157,13 +176,13 @@ print(Boston.mars2) # Shows 3 B coefficients
 
 #### Method 2: summary(mars_object)
 
-Boston.mars1 object
+\texttt{Boston.mars1} object
 
 ```{r}
 summary(Boston.mars1)
 ```
 
-Boston.mars2 object
+\texttt{Boston.mars2} object
 
 ```{r}
 summary(Boston.mars2)
@@ -171,13 +190,13 @@ summary(Boston.mars2)
 
 #### Method 3: anova(mars_object)
 
-Boston.mars1 object
+\texttt{Boston.mars1} object
 
 ```{r}
 anova(Boston.mars1)
 ```
 
-Boston.mars2 object
+\texttt{Boston.mars2} object
 
 ```{r}
 anova(Boston.mars2)
@@ -189,7 +208,6 @@ anova(Boston.mars2)
 #Calling mars with default parameters and applying predict.mars
 Iris.Mars <-mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,
                  data=iris,control=mars.control())
-
 #Returns the "fitted.values" component of Iris.mars since data set is unchanged
 prediction_iris_no_noise = predict(Iris.Mars)
 print(prediction_iris_no_noise)
@@ -202,7 +220,6 @@ set.seed(123)
 iris2$Sepal.Width = round(iris$Sepal.Width + rnorm(150),1)
 iris2$Petal.Length = round(iris$Petal.Length + rnorm(150),1)
 iris2$Petal.Width = round(iris$Petal.Width + rnorm(150, sd = 0.1)+0.2,1)
-
 #New predicted values on dataset with noise
 prediction_iris_with_noise = predict(Iris.Mars,iris2)
 print(prediction_iris_with_noise)
@@ -217,7 +234,6 @@ print(prediction_iris_with_noise)
 Car.mars = mars(Rev.per.mile~EngineSize+Horsepower+RPM+as.factor(Origin)+
                   Fuel.tank.capacity+MPG.city+MPG.highway,
                 data = Cars93, mars.control(Mmax = 6, d = 3, trace = FALSE))
-
 #Plotting default plot (cycles through the 4 plots that plot.mars produces)
 plot(Car.mars)
 ```
@@ -226,13 +242,11 @@ plot(Car.mars)
 
 ```{r}
 #Additional parameters that can be altered include: which, col, numpoints
-
 #which: plots can be done individually by specifying their index
 #'1 = "CDF" plot of absolute value of residuals
 #'2 = "Residual vs Fitted" plot
 #'3 = "Normal Q-Q" plot
 #'4 = "Scale-Location" plot
-
 #Example: specify '1' for the Cumulative Distribution plot
 plot(Car.mars, which = 1)
 ```
