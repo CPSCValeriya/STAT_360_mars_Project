@@ -1,6 +1,10 @@
 # STAT 360 Project: Multivariate Adaptive Regression Spline (mars) Package
 
-#### Please use: install_github(repo="CPSCValeriya/STAT_360_mars_Project/mars")
+### Install:
+
+-   Please use: **install_github(repo="CPSCValeriya/STAT_360_mars_Project/mars")**
+-   We recommend to run **rm(list=ls())** followed by **load_all()** to run the package
+-   Runnable documentation can be found in vignettes/mars_documentation.Rmd
 
 ### Contributors and Contributions:
 
@@ -65,8 +69,5 @@
 ### References:
 
 -   Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1--67. <https://doi.org/10.1214/aos/1176347963>
+
 -   Wei, B. (2023). Lecture Material.
-
-### Other:
-
--   **Please run rm(list=ls()) followed by load_all() to start the project**
