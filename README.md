@@ -2,8 +2,8 @@
 
 ### Install:
 
--   Please use: **install_github(repo="CPSCValeriya/STAT_360_mars_Project/mars")**
--   We recommend to run **rm(list=ls())** followed by **load_all()** to run the package
+-   Please use: **install_github(repo="CPSCValeriya/STAT_360_mars_Project")**
+-   We recommend to run **rm(list=ls())** followed by **load_all()** to run the package source code
 -   Runnable documentation can be found in vignettes/mars_documentation.Rmd
 
 ### Contributors and Contributions:

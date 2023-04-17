@@ -15,9 +15,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### <https://github.com/CPSCValeriya/STAT_360_mars_Project/tree/main/mars>
 
-#### Please use: install_github(repo="CPSCValeriya/STAT_360_mars_Project/mars")
+#### Please use: install_github(repo="CPSCValeriya/STAT_360_mars_Project")
 
-**We recommend the viewer to run rm(list=ls()) to clear their environment before running our package. Steps we have followed have been clearing the environment and running load_all()**
+**We recommend the viewer to run rm(list=ls()) to clear their environment before running our package**
 
 ## Description
 
