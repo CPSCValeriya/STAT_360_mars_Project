@@ -1,23 +1,25 @@
 ---
 title: "Multivariate Adaptive Regression Splines"
-author: "Zenith (Robert) Tandava Yurkovich, Valeriya Kistrina"
+author: "Zenith (Robert) Tandava Yurkovich, Valeriya Kistrina, Christine Chuong"
 date: "2023-04-16"
 output:
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(mars)
 ```
 
-#### MARS package GitHub Repo link:
+## Instructions:
 
-#### <https://github.com/CPSCValeriya/STAT_360_mars_Project/tree/main/mars>
+-   MARS package GitHub Repo link: [https://github.com/CPSCValeriya/STAT_360_mars_Project](https://github.com/CPSCValeriya/STAT_360_mars_Project/tree/main/mars){.uri}
 
-#### Please use: install_github(repo="CPSCValeriya/STAT_360_mars_Project")
+-   Please use: install_github(repo="CPSCValeriya/STAT_360_mars_Project")
 
-**We recommend the viewer to run rm(list=ls()) to clear their environment before running our package**
+-   We recommend to run **rm(list=ls())** followed by **load_all()** to run the package source code
 
 ## Description
 
@@ -53,7 +55,7 @@ The knots produced by the mars function can be influenced by the user via the co
 
 -   **d**: a parameter that affects the LOF function and thereby affects how many knots are produced. In general, a larger d value will result in a smaller number of knots in the output of the mars function
 
-## **Value**
+## Value
 
 The mars() function returns an object of class mars. The mars object is a list containing at least the following components (as well as the components of its parent class lm which are not all listed):
 
@@ -99,21 +101,25 @@ Lin, W. (2023). Lecture Material.
 
 ## See Also
 
--   **print.mars:** prints out a user-friendly output of the mars object details (includes the coefficients, basis functions, product and call)
+-   **print.mars(mars_object):** prints out a user-friendly output of the mars object details (includes the coefficients, basis functions, product and call)
 
--   **summary.mars:** provides a detailed summary of the mars model object (includes the coefficients, basis functions, residuals, additional statistics and other)
+-   **summary.mars(mars_object):** outputs a detailed summary of the mars model object (includes the coefficients, basis functions, residuals, additional statistics and other)
 
--   **anova.mars:** prints the Analysis of Variance Table (ANOVA) and details on the corresponding mars object
+-   **anova.mars(mars_object):** prints the Analysis of Variance Table (ANOVA) and details on the corresponding mars object
 
--   **predict.mars:** generates a prediction, obtaining estimated values of the response variable given a different dataset and mars model object
+-   **predict.mars(mars_object, newdata):** outputs a prediction, obtaining estimated values of the response variable given a different dataset and mars model object. newdata argument is optional.
 
--   **plot.mars:** generates four different plots based on the provided mars object (Residuals vs. Fitted, Quantile-Quantile, Scale-Location, and Residuals vs. Leverage)
+-   **plot.mars(mars_object,** **mars, which=c(1,2,3,4), col="purple", numpoints=3,\...):** generates four different plots based on the provided mars object (Residuals vs. Fitted, Quantile-Quantile, Scale-Location, and Residuals vs. Leverage). The user can specify a combination of the passed in parameters: 'which' specifies a subset of plots to output, 'col' specifies a color for the line in the cdf plot or the points n the remaining points, and 'numpoints' specifies how many of the largest absolute value points to plot
+
+-   **print_product(mars_object):** helper function to print the basis functions of the mars object
+
+-   **print_basis(mars_object):** helper function to print the mars object product of hinge functions
 
 ## Examples
 
 Below is a collection of examples on how to use the mars function and methods written for its output:
 
-#### Example 1.1: Utilizing the mars() function with Boston city data from the MASS package
+### Example 1.1: Utilizing the mars() function with Boston city data from the MASS package
 
 -   Please note: an increase in Mmax increases the time required to return the mars output
 
@@ -131,35 +137,53 @@ Boston.mars2 = mars(crim~age+nox+rm+dis+tax, Boston,
                     control = mars.control(Mmax = 6, d = 2, trace = TRUE))
 ```
 
-#### Example 1.2: Utilizing the mars() object methods (print, summary, anova)
+### Example 1.2: Utilizing the mars() object methods (print, summary, anova)
 
 -   See Example 2 for predict function and Example 3 for plot function
 
+#### Method 1: print(mars_object)
+
+Boston.mars1 object
+
 ```{r}
-#Method 1: print
-cat("Boston.mars1 object -------------------------------\n\n");
 print(Boston.mars1) # Shows 2 B coefficients
-cat("\nBoston.mars1 object -------------------------------\n\n");
+```
+
+Boston.mars2 object
+
+```{r}
 print(Boston.mars2) # Shows 5 B coefficients
 ```
 
+#### Method 2: summary(mars_object)
+
+Boston.mars1 object
+
 ```{r}
-#Method 2: summary
-cat("Boston.mars1 object -------------------------------\n\n");
 summary(Boston.mars1)
-cat("\nBoston.mars2 object -------------------------------\n\n");
+```
+
+Boston.mars2 object
+
+```{r}
 summary(Boston.mars2)
 ```
 
+#### Method 3: anova(mars_object)
+
+Boston.mars1 object
+
 ```{r}
-#Method 3: anova
-cat("Boston.mars1 object -------------------------------\n\n");
 anova(Boston.mars1)
-cat("\nBoston.mars2 object -------------------------------\n\n");
+```
+
+Boston.mars2 object
+
+```{r}
 anova(Boston.mars2)
 ```
 
-#### Example 2: Utilizing the predict method with the Iris data set 
+### Example 2: Utilizing the predict method with the Iris data set
 
 ```{r}
 #Calling mars with default parameters and applying predict.mars
@@ -184,7 +208,7 @@ prediction_iris_with_noise = predict(Iris.Mars,iris2)
 print(prediction_iris_with_noise)
 ```
 
-#### Example 3.1: Using default plot on mars objects with Cars93 data from the MASS package
+### Example 3.1: Using default plot on mars objects with Cars93 data from the MASS package
 
 -   Please note: Hit \<Return\> to see the plots
 
@@ -195,11 +219,10 @@ Car.mars = mars(Rev.per.mile~EngineSize+Horsepower+RPM+as.factor(Origin)+
                 data = Cars93, mars.control(Mmax = 6, d = 3, trace = FALSE))
 
 #Plotting default plot (cycles through the 4 plots that plot.mars produces)
-cat("\nplot with default arguments\n")
 plot(Car.mars)
 ```
 
-#### Example 3.2: Plot with additional arguments on mars objects with Cars93 data 
+### Example 3.2: Plot with additional arguments on mars objects with Cars93 data
 
 ```{r}
 #Additional parameters that can be altered include: which, col, numpoints
@@ -210,34 +233,21 @@ plot(Car.mars)
 #'3 = "Normal Q-Q" plot
 #'4 = "Scale-Location" plot
 
-#Specify '1' for the Cumulative Distribution plot
-cat("\n1= Cumulative Distribution plot\n")
+#Example: specify '1' for the Cumulative Distribution plot
 plot(Car.mars, which = 1)
-
-#Specify '2' for the Residuals vs. Fitted plot
-cat("\n2= Residuals vs. Fitted plot\n")
-plot(Car.mars, which = 2)
-
-#Specify '3' for the Normal Q-Q plot
-cat("\n3 = Normal Q-Q plot\n")
-plot(Car.mars, which = 3)
-
-#Specify '4' for the Scale-Location plot
-cat("\n4 = Scale-Location plot\n")
-plot(Car.mars, which = 4)
 ```
 
 ```{r}
 #col: specify a colour of the points. Purple by default.
-plot(Car.mars, col="blue")
+plot(Car.mars, which = 2, col="blue")
 ```
 
 ```{r}
 #numpoints: how many of the largest absolute value points to plot
-plot(Car.mars, numpoints=50)
+plot(Car.mars, which = 3, numpoints=50)
 ```
 
 ```{r}
 #A combination of parameters can be specified:
-plot(Car.mars, which=c(1,2,3),col="orange",numpoints=40)
+plot(Car.mars, which=c(2,4),col="orange",numpoints=40)
 ```
