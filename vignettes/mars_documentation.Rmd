@@ -68,9 +68,9 @@ The \texttt{mars} function returns an object of class \texttt{mars}. The \texttt
 
 -   **\texttt{y}**: the formula's response variable's values
 
--   **\texttt{B}**: a matrix of values by which the coefficients will be multiplied (see also coefficients)
+-   **\texttt{B}**: final set of basis functions generated from the input data 
 
--   **\texttt{Bfuncs}**: a list containing the knot points
+-   **\texttt{Bfuncs}**: summary of the basis functions as a product of functions. Contains the information for the knot, variable, and sign
 
 -   **\texttt{call}**: the call of the mars function with the given inputs
 
