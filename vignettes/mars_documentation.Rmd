@@ -60,7 +60,7 @@ The knots produced by \texttt{mars} can be influenced by the user via the \textt
 
 -   **\texttt{d}**: a parameter that affects the LOF function and thereby affects how many knots are produced. In general, a larger \texttt{d} value will result in a smaller number of knots in the output of the mars function; although, sometimes an increase in \texttt{d} will not affect the number of knots.
 
--   **\texttt{trace}**: a logical argument that is set to \texttt{FALSE} by default. If set to \texttt{TRUE}, the program will provide additional information as the knots are created.
+-   **\texttt{trace}**: a logical argument that is set to \texttt{FALSE} by default. If set to \texttt{TRUE}, the program will provide additional information as the basis functions are created/removed.
 
 ## Value
 
