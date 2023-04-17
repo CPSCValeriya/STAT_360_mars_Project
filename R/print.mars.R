@@ -1,5 +1,6 @@
 #' Print values for a mars Object
 #'
+#' @description Prints out a user-friendly output of the mars object details (includes the coefficients, basis functions, product and call)
 #' @param mars a mars object, usually created by mars
 #' @import crayon
 #' @export

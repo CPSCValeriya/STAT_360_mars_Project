@@ -12,19 +12,17 @@ bwd_stepwise(fwd, control)
 \item{control}{mars.control object, created with mars.control}
 }
 \value{
-A list with elements
-\describe{
-\item{y The same vector of response values given as input}{}
-\item{B }{}
-\item{Bfuncs }{}
-}
+A list with elements: y, B, Bfuncs
+\item{y}{the same vector of response values given as input}
+\item{B}{final set of basis functions generated from the input}
+\item{Bfuncs}{summary of the basis functions as a product of functions. Contains the information for the knot, variable, and sign}
 }
 \description{
-Implementation of Backwards Stepwise algorithm (algorithm
-3 from page 17 of the Friedman paper)
+Implements the Backwards Stepwise algorithm (Algorithm
+3 from page 17 of the Friedman paper) which combats overfitting of the forward stepwise algorithm by removing redundant basis functions until the generalized cross-validation criterion is satisfied.
 }
 \references{
-Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
- 1–67. https://doi.org/10.1214/aos/1176347963
-Lin, W. (2023). Lecture Material.
+\describe{
+\item{Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963}{}
+\item{Lin, W. (2023). Lecture Material.}{}}
 }

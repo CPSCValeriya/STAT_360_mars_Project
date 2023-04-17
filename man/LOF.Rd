@@ -2,7 +2,7 @@
 % Please edit documentation in R/mars.R
 \name{LOF}
 \alias{LOF}
-\title{Lack Of Fit}
+\title{Lack Of Fit method}
 \usage{
 LOF(form, data, control)
 }
@@ -17,10 +17,10 @@ LOF(form, data, control)
 lof, the lack of fit value for the linear model fit with the given data and formula
 }
 \description{
-Use GCV to calculate the the lack of fit of a model, following equation 30
-on page 20 of the Friedman paper
+Uses the generalized cross-validation criterion to calculate the lack of fit of a model, following equation 30 on page 20 of the Friedman paper.
 }
 \references{
-Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
-Lin, W. (2023). Lecture Material.
+\describe{
+\item{Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963}{}
+\item{Lin, W. (2023). Lecture Material.}{}}
 }

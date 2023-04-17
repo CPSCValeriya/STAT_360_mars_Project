@@ -17,8 +17,10 @@ mars(formula, data, control = mars.control())
 An S3 model of class "mars"
 }
 \description{
-Implementation of Fit Friedman's Multivariate Adaptive Regression
-Splines (MARS) model.
+Implementation of Fit Friedman's Multivariate Adaptive Regression Splines (MARS) model. The Multivariate Adaptive Regression Spline is used to apply a regression model to a given set of data. In doing so, the function analyzes the dataset and creates numerous knots: points at which the fitted model will change.
+}
+\details{
+Multivariate Adaptive Regression Splines (MARS)
 }
 \examples{
 ## Analyzing flower value data found in the iris dataset
@@ -26,11 +28,12 @@ mars.mod <- mars(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data=iris,con
 print(mars.mod)
 }
 \references{
-Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
-Lin, W. (2023). Lecture Material.
+\describe{
+\item{Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963}{}
+\item{Lin, W. (2023). Lecture Material.}{}}
 }
 \seealso{
-\describe{
+\itemize{
 \item{anova.mars}{}
 \item{plot.mars}{}
 \item{predict.mars}{}

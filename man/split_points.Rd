@@ -16,7 +16,7 @@ a sorted list of unique split points where the basis function is positive,
 with the largest point removed
 }
 \description{
-Find possible split points and sort them, removing the largest value
+Find possible split points and sort them, removing the largest value.
 }
 \references{
 Lin, W. (2023). Lecture Material.

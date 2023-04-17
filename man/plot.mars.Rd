@@ -24,8 +24,7 @@
 \item{...}{Extra parameters to pass to plotting functions}
 }
 \description{
-Four plots (selected by which) are available: a cdf plot of |residuals|, a fitted vs residual plot,
-a q-q plot and a scale-location plot
+Four plots (selected by which) are available: a cdf plot of |residuals|, fitted vs residual plot, q-q plot and a scale-location plot
 }
 \details{
 Plot Diagnostics for a mars Object

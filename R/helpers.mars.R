@@ -1,8 +1,9 @@
 library(crayon)
 
-#' Print Basis Functions of mars object
+#' Print Basis Functions of a mars Object
 #'
-#' @title Print Basis Functions of mars objec
+#' @title Print Basis Functions of mars object
+#' @description Allows the user to print the basis functions of the passed in mars object
 #' @param mars a mars object, created using mars
 #' @import crayon
 #' @export
@@ -46,9 +47,10 @@ print_basis = function(mars){
 
 }
 
-#' Print Product of mars object hinge functions
+#' Print Product of mars Object hinge functions
 #'
 #' @title Print Product of mars object hinge functions
+#' @description Allows the user to print the product of hinge functions for the passed in mars object
 #' @param mars a mars object, created using mars
 #' @import crayon
 #' @export

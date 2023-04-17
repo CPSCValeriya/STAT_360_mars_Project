@@ -11,20 +11,20 @@ fwd_stepwise(y, x, control = mars.control())
 
 \item{x}{dataset of predictor variables}
 
-\item{control}{mars.control object created by mars.control}
+\item{control}{mars.control object created by the mars.control method}
 }
 \value{
-A list with elements
-\describe{
-\item{y The same vector of response values given as input}{}
-\item{B }{}
-\item{Bfuncs }{}}
+A list with elements: y, B, Bfuncs
+\item{y}{the same vector of response values given as input}
+\item{B}{final set of basis functions generated from the input}
+\item{Bfuncs}{summary of the basis functions as a product of functions. Contains the information for the knot, variable, and sign}
 }
 \description{
-Implementing Forward Stepwise algorithm (algorithm 2 from page 17 of the
-Friedman Paper)
+Implements the Forward Stepwise algorithm (Algorithm 2 from page 17 of the
+Friedman Paper) which  builds a linear prediction equation of linear basis functions which are the products of hinge functions.
 }
 \references{
-Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
-Lin, W. (2023). Lecture Material.
+\describe{
+\item{Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963}{}
+\item{Lin, W. (2023). Lecture Material.}{}}
 }

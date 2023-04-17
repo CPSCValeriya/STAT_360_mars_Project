@@ -1,5 +1,6 @@
-#' Title summary.mars
+#' Summary of a mars Object
 #'
+#' @description Outputs a detailed summary of the mars model object (includes the coefficients, basis functions, residuals, additional statistics and other)
 #' @param mars a mars object, usually created by mars
 #' @return The function summary.mars computes and returns a list of summary
 #' statistics of the fitted linear model given in object,

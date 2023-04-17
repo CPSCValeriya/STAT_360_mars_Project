@@ -13,5 +13,8 @@ new_mars.control(control)
 a mars.control object
 }
 \description{
-Helper function to create a new mars.control object
+Helper function to create a new mars.control object.
+}
+\references{
+Lin, W. (2023). Lecture Material.
 }

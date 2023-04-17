@@ -10,7 +10,10 @@ print_product(mars)
 \item{mars}{a mars object, created using mars}
 }
 \description{
-Print Product of mars object hinge functions
+Allows the user to print the product of hinge functions for the passed in mars object
+}
+\details{
+Print Product of mars Object hinge functions
 }
 \examples{
 mtcars_mars = mars(mpg~., data=mtcars, control=mars.control());

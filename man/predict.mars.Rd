@@ -15,10 +15,10 @@
 a vector of prediction values
 }
 \description{
-Predict method for mars objects
+Implementation of predict method for mars object. Outputs a prediction, obtaining estimated values of the response variable given a different dataset and mars model object. The newdata argument is optional.
 }
 \details{
-Implementation of predict method for mars object
+Predict method for mars Objects
 }
 \examples{
 ## Predict values for iris data

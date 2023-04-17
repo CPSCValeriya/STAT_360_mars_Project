@@ -2,8 +2,7 @@
 #'
 #' @title Plot Diagnostics for a mars Object
 #'
-#' @description Four plots (selected by which) are available: a cdf plot of |residuals|, a fitted vs residual plot,
-#' a q-q plot and a scale-location plot
+#' @description Four plots (selected by which) are available: a cdf plot of |residuals|, fitted vs residual plot, q-q plot and a scale-location plot
 #'
 #' @param mars a mars object, typically the result of [mars()]
 #' @param which a subset of the numbers 1:4 specifying which plots to create, by default 1:4

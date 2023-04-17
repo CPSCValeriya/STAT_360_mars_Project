@@ -10,7 +10,7 @@
 \item{mars}{a mars object, usually created by mars}
 }
 \description{
-Print values for a mars Object
+Prints out a user-friendly output of the mars object details (includes the coefficients, basis functions, product and call)
 }
 \examples{
 ## Print output for fitting a mars to the mtcars data

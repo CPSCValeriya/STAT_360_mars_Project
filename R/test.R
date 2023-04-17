@@ -2,7 +2,7 @@
 #' Examples below show how a user can call mars()
 #' and illustrates the functions created for the MARS object
 #' Additional details can be found in the project documentation.
-
+#'
 library(MASS)
 
 #Example 0: Provided data set -------------------------------------------------
@@ -28,16 +28,16 @@ Boston.mars1 = mars(crim~age+nox+rm+dis+tax, Boston, control = mars.control())
 #Mmax is increased (2 -> 10)
 #d is decreased (3 -> 2)
 #These two will lead to more knots than Boston.mars1
-cat("\nExample 1: calling mars with specified parameters (Mmax = 6, d = 2, trace=TRUE)\n")
+cat("\nExample 1: calling mars with specified parameters (Mmax = 4, d = 2, trace=TRUE)\n")
 Boston.mars2 = mars(crim~age+nox+rm+dis+tax, Boston,
-                    control = mars.control(Mmax = 6, d = 2, trace = TRUE))
+                    control = mars.control(Mmax = 4, d = 2, trace = TRUE))
 
 cat("\nExample 1: print\n")
 #Method 1: print
 print(Boston.mars1)
 #2 B coefficients
 print(Boston.mars2)
-#5 B coefficients
+#3 B coefficients
 
 #Method 2: summary
 cat("\nExample 1: summary\n")

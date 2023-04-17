@@ -134,7 +134,7 @@ Boston.mars1 = mars(crim~age+nox+rm+dis+tax, Boston, control = mars.control())
 #These two will lead to more knots than Boston.mars1
 #See use of trace = TRUE to print progress details 
 Boston.mars2 = mars(crim~age+nox+rm+dis+tax, Boston,
-                    control = mars.control(Mmax = 6, d = 2, trace = TRUE))
+                    control = mars.control(Mmax = 4, d = 2, trace = TRUE))
 ```
 
 ### Example 1.2: Utilizing the mars() object methods (print, summary, anova)
@@ -152,7 +152,7 @@ print(Boston.mars1) # Shows 2 B coefficients
 Boston.mars2 object
 
 ```{r}
-print(Boston.mars2) # Shows 5 B coefficients
+print(Boston.mars2) # Shows 3 B coefficients
 ```
 
 #### Method 2: summary(mars_object)

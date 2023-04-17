@@ -1,7 +1,6 @@
-#' Predict method for mars objects
+#' Predict method for mars Objects
 #'
-#' Implementation of predict method for mars object
-#'
+#' @description Implementation of predict method for mars object. Outputs a prediction, obtaining estimated values of the response variable given a different dataset and mars model object. The newdata argument is optional.
 #' @title Predict method for mars objects
 #' @param object a mars object to use for prediction, usually created by mars
 #' @param newdata optional data to use for prediction

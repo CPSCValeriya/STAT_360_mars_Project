@@ -2,7 +2,7 @@
 % Please edit documentation in R/anova.mars.R
 \name{anova.mars}
 \alias{anova.mars}
-\title{ANOVA for MARS Model Fits}
+\title{ANOVA for mars objects}
 \usage{
 \method{anova}{mars}(mars)
 }
@@ -10,10 +10,10 @@
 \item{mars}{a mars object}
 }
 \description{
-ANOVA for MARS Model Fits
+Outputs the Analysis of Variance table for the passed in mars object, as well as additional information on the passed in object.
 }
 \details{
-Implementation of ANOVA for mars object
+ANOVA for mars Objects
 }
 \examples{
 ## Analyzing Ozone data with mars function

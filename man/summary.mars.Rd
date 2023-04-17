@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.mars.R
 \name{summary.mars}
 \alias{summary.mars}
-\title{Title summary.mars}
+\title{Summary of a mars Object}
 \usage{
 \method{summary}{mars}(mars)
 }
@@ -15,7 +15,7 @@ statistics of the fitted linear model given in object,
 using the components (list elements) "call" and "terms" from its argument
 }
 \description{
-Title summary.mars
+Outputs a detailed summary of the mars model object (includes the coefficients, basis functions, residuals, additional statistics and other)
 }
 \examples{
 m <-mars(Ozone~Wind+Temp+Month,data=airquality,control=mars.control())

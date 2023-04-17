@@ -1,8 +1,7 @@
-#' ANOVA for MARS Model Fits
+#' ANOVA for mars Objects
 #'
-#' Implementation of ANOVA for mars object
-#'
-#' @title ANOVA for MARS Model Fits
+#' @title ANOVA for mars objects
+#' @description Outputs the Analysis of Variance table for the passed in mars object, as well as additional information on the passed in object.
 #' @param mars a mars object
 #' @import crayon
 #' @export

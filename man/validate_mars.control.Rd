@@ -13,7 +13,7 @@ validate_mars.control(control)
 a mars.control object
 }
 \description{
-Check that a mars.control object has valid parameters
+Checks that a mars.control object has valid parameters.
 }
 \references{
 Lin, W. (2023). Lecture Material.

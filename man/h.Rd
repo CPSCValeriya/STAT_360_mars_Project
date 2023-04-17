@@ -2,7 +2,7 @@
 % Please edit documentation in R/mars.R
 \name{h}
 \alias{h}
-\title{Step Function}
+\title{Hinge Function}
 \usage{
 h(x, s, t)
 }
@@ -17,9 +17,10 @@ h(x, s, t)
 if s=+1, this returns max(0,x-t); if s=-1, this return max(0,t-x)
 }
 \description{
-Implementation of the step function defined on page 11 of the Friedman paper
+Implementation of the hinge function defined on page 11 of the Friedman paper. Basis products of the mars object are a product of the hinge functions.
 }
 \references{
-Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
-Lin, W. (2023). Lecture Material.
+\describe{
+\item{Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963}{}
+\item{Lin, W. (2023). Lecture Material.}{}}
 }

@@ -14,8 +14,7 @@ mars.control(Mmax = 2, d = 3, trace = FALSE)
 \item{trace}{logical specifying whether more information should be printed to the user}
 }
 \description{
-This function constructs a `mars.control` object that specifies
-parameters used in the model fitting procedure.
+This function constructs a `mars.control` object that specifies parameters used in the model fitting procedure.
 }
 \references{
 Lin, W. (2023). Lecture Material.

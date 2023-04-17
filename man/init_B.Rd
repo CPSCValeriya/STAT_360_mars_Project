@@ -16,7 +16,7 @@ a data frame with an intercept column filled with ones and a column filled with
 NA for each basis function.
 }
 \description{
-Initialize a matrix for all the basis functions
+Initializes an empty matrix to store the basis functions.
 }
 \references{
 Lin, W. (2023). Lecture Material.
