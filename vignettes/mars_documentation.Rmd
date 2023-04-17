@@ -118,7 +118,7 @@ R Core Team (2022). R: A language and environment for statistical computing. R F
 
 -   **\texttt{predict.mars(mars\_object, newdata)}**: outputs a prediction, obtaining estimated values of the response variable given a different dataset and mars model object. \texttt{newdata} argument is optional.
 
--   **\texttt{plot.mars(mars\_object, which=c(1,2,3,4), col="purple", numpoints=3,\...)}**: generates four different plots based on the provided mars object (Residuals vs. Fitted, Quantile-Quantile, Scale-Location, and Residuals vs. Leverage). The user can specify a combination of the passed in parameters: '\texttt{which}' specifies a subset of plots to output, '\texttt{col}' specifies a color for the line in the cdf plot or the points n the remaining points, and '\texttt{numpoints}' specifies how many of the largest absolute value points to plot
+-   **\texttt{plot.mars(mars\_object, which=c(1,2,3,4), col="purple", numpoints=3, ...)}**: generates four different plots based on the provided mars object (Residuals vs. Fitted, Quantile-Quantile, Scale-Location, and Residuals vs. Leverage). The user can specify a combination of the passed in parameters: '\texttt{which}' specifies a subset of plots to output, '\texttt{col}' specifies a color for the line in the cdf plot or the points in the remaining plots, and '\texttt{numpoints}' specifies how many of the largest absolute value points to plot
 
 -   **\texttt{print\_product(mars\_object)}**: helper function to print the basis functions of the mars object
 
