@@ -7,7 +7,7 @@
 \method{predict}{mars}(object, newdata)
 }
 \arguments{
-\item{object}{a mars object to use for prediction, usually created by mars()}
+\item{object}{a mars object to use for prediction, usually created by mars}
 
 \item{newdata}{optional data to use for prediction}
 }
@@ -16,6 +16,9 @@ a vector of prediction values
 }
 \description{
 Predict method for mars objects
+}
+\details{
+Implementation of predict method for mars object
 }
 \examples{
 ## Predict values for iris data

@@ -12,6 +12,9 @@
 \description{
 ANOVA for MARS Model Fits
 }
+\details{
+Implementation of ANOVA for mars object
+}
 \examples{
 ## Analyzing Ozone data with mars function
 m <-mars(Ozone~Wind+Temp+Month,data=airquality,control=mars.control())

@@ -10,7 +10,7 @@ print_product(mars)
 \item{mars}{a mars object, created using mars}
 }
 \description{
-Print Product
+Print Product of mars object hinge functions
 }
 \examples{
 mtcars_mars = mars(mpg~., data=mtcars, control=mars.control());

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mars.R
 \name{init_B}
 \alias{init_B}
-\title{Initialize B}
+\title{Initialize B matrix}
 \usage{
 init_B(N, Mmax)
 }
@@ -17,4 +17,7 @@ NA for each basis function.
 }
 \description{
 Initialize a matrix for all the basis functions
+}
+\references{
+Lin, W. (2023). Lecture Material.
 }

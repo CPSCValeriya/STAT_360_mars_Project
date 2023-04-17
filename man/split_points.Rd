@@ -18,3 +18,6 @@ with the largest point removed
 \description{
 Find possible split points and sort them, removing the largest value
 }
+\references{
+Lin, W. (2023). Lecture Material.
+}

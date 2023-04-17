@@ -18,13 +18,13 @@ A list with elements
 \describe{
 \item{y The same vector of response values given as input}{}
 \item{B }{}
-\item{Bfuncs }{}
-}
+\item{Bfuncs }{}}
 }
 \description{
-Implementing algorithm 2 from the page 17 of the Friedman Paper
+Implementing Forward Stepwise algorithm (algorithm 2 from page 17 of the
+Friedman Paper)
 }
 \references{
-Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
- 1–67. https://doi.org/10.1214/aos/1176347963
+Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
+Lin, W. (2023). Lecture Material.
 }

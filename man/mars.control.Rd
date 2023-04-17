@@ -9,11 +9,14 @@ mars.control(Mmax = 2, d = 3, trace = FALSE)
 \arguments{
 \item{Mmax}{Maximum number of basis functions. Should be an even integer. Default value is 2.}
 
-\item{d}{A smoothing parameter}
+\item{d}{A smoothing parameter. Default value is 3.}
 
-\item{trace}{logical, if TRUE traceback??????}
+\item{trace}{logical specifying whether more information should be printed to the user}
 }
 \description{
 This function constructs a `mars.control` object that specifies
 parameters used in the model fitting procedure.
+}
+\references{
+Lin, W. (2023). Lecture Material.
 }

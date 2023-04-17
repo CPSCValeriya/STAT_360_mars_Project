@@ -20,7 +20,6 @@ Title summary.mars
 \examples{
 m <-mars(Ozone~Wind+Temp+Month,data=airquality,control=mars.control())
 summary(m)
-
 }
 \seealso{
 Other methods: 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.mars.R
 \name{print_basis}
 \alias{print_basis}
-\title{Print Basis Functions}
+\title{Print Basis Functions of mars objec}
 \usage{
 print_basis(mars)
 }
@@ -10,7 +10,7 @@ print_basis(mars)
 \item{mars}{a mars object, created using mars}
 }
 \description{
-Print Basis Functions
+Print Basis Functions of mars object
 }
 \examples{
 mtcars_mars = mars(mpg~., data=mtcars, control=mars.control());

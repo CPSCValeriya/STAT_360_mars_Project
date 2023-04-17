@@ -15,5 +15,8 @@ make_B(model, Bfuncs)
 The corresponding matrix of basis functions
 }
 \description{
+Make B matrix
+}
+\details{
 Create set of basis functions using the Bfuncs list
 }

@@ -21,6 +21,6 @@ Use GCV to calculate the the lack of fit of a model, following equation 30
 on page 20 of the Friedman paper
 }
 \references{
-Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
- 1–67. https://doi.org/10.1214/aos/1176347963
+Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1–67. https://doi.org/10.1214/aos/1176347963
+Lin, W. (2023). Lecture Material.
 }

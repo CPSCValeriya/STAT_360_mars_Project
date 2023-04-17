@@ -20,9 +20,11 @@ A list with elements
 }
 }
 \description{
-Implementation of algorithm 3 from page 17 of the Friedman paper
+Implementation of Backwards Stepwise algorithm (algorithm
+3 from page 17 of the Friedman paper)
 }
 \references{
 Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1),
  1–67. https://doi.org/10.1214/aos/1176347963
+Lin, W. (2023). Lecture Material.
 }
