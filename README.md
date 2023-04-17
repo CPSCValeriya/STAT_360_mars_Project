@@ -12,7 +12,7 @@
 
 -   **Zenith (Robert) Tandava Yurkovich**: long form documentation, test suite
 
--   **Valeriya Kistrina**: mars, mars object methods, helper functions, documentation
+-   **Valeriya Kistrina**: mars, mars object methods, helper functions
 
 **Work was divided equally and work division was agreed upon and discussed.**
 
@@ -73,3 +73,7 @@
 -   Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1--67. <https://doi.org/10.1214/aos/1176347963>
 
 -   Wei, B. (2023). Lecture Material.
+
+-   Milborrow, S. H., Hastie, T., Tibshirani, R., Miller, A., & Lumley, T. (2021). earth: Multivariate Adaptive Regression Splines, R package version 5.3.1.
+
+-   R Core Team (2022). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria.
