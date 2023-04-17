@@ -45,7 +45,7 @@ summary(Boston.mars1)
 summary(Boston.mars2)
 
 #Method 3: anova
-cat("\nExample 1: print\n")
+cat("\nExample 1: anova\n")
 anova(Boston.mars1)
 anova(Boston.mars2)
 
