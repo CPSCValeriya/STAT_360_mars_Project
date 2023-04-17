@@ -66,6 +66,8 @@
 
 -   DESCRIPTION - file containing information about the package
 
+-   mars.Rproj - mars project file
+
 ### References:
 
 -   Friedman, J. H. (1991). Multivariate Adaptive Regression Splines. The Annals of Statistics, 19(1), 1--67. <https://doi.org/10.1214/aos/1176347963>
